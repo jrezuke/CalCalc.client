@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <form novalidate #siteForm="ngForm">
+      <div class="form-group">
+        <label for="shortName">Short Name</label>
+        <input type="text" class="form-control" [(ngModel)]="site.shortName" name="shortName" required placeholder="Short Name" #shortName="ngModel">
+        <small [hidden]="shortName.valid || shortName.pristine" class="alert alert-danger">
+            Short Name is required
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="longName">Long Name</label>
+        <input type="text" class="form-control" [(ngModel)]="site.longName" name="longName" required placeholder="Long Name" #longName="ngModel">
+        <small [hidden]="longName.valid || longName.pristine" class="alert alert-danger">
+            Long Name is required
+        </small>
+      </div>
+      <button (click)="onSubmit(siteForm.form)" class="btn btn-default" [disabled]="!siteForm.form.valid">Update</button>
+      <button (click)="onCancel()" type="button" class="btn ">Cancel</button>
+    </form>
+  </div>
+
+</div>

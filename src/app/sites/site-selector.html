@@ -1,0 +1,11 @@
+<div>
+  <span>Select site: </span> &nbsp;
+  <select #sel (change)="select.emit(sel.value)">
+            <option *ngFor="let site of sites" [value] = site.id>
+                {{site.shortName}}
+            </option>
+        </select> &nbsp;
+
+  <span>or create new subject:</span>
+  <a class="btn btn-sm" [routerLink]="['sites/new']">New Site</a>
+</div>

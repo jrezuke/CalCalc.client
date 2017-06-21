@@ -1,0 +1,21 @@
+<div>
+  <table>
+    <thead>
+      <td>Id</td>
+      <td>Short Name</td>
+      <td>Long Name</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let site of sites">
+        <td>{{site.id}}</td>
+        <td>{{site.shortName}}</td>
+        <td>{{site.longName}}</td>
+        <td><button (click)="onEdit(site)">Edit</button></td>
+      </tr>
+      <tr>
+        <td class="tdNew" colspan="4">Add new site</td>
+        <td><button (click)="onNew()">New</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
