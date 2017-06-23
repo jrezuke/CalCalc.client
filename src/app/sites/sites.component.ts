@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SecurityService } from "app/shared/security.service";
 
 @Component({
   selector: 'app-sites',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SitesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _securityService: SecurityService) { }
 
   ngOnInit() {
+    this._securityService.state$.subscribe(v => {
+      console.log("SitesComponent.ngOnItit _securityService.state", v);
+    })
   }
 
 }
