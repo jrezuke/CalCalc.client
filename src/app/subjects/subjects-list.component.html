@@ -1,0 +1,23 @@
+<div>
+  <table>
+    <thead>
+      <td>Id</td>
+      <td>Site Id</td>
+      <td>Subject Id</td>
+      <td>Start Date</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subject of subjects">
+        <td>{{subject.id}}</td>
+        <td>{{subject.siteId}}</td>
+        <td>{{subject.subjectId}}</td>
+        <td>{{subject.startDate}}</td>
+        <td><button (click)="onEdit(subject)">Edit</button></td>
+      </tr>
+      <tr>
+        <td class="tdNew" colspan="4">Add new subject</td>
+        <td><button (click)="onNew()">New</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

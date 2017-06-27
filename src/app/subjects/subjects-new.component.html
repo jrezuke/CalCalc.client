@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <form novalidate #subjectForm="ngForm">
+      <div class="form-group">
+        <label for="subjectId">Subject Id</label>
+        <input type="text" class="form-control" [(ngModel)]="subject.subjectId" name="subjectId" required placeholder="Subject Id"
+          #subjectId="ngModel">
+        <small [hidden]="subjectId.valid || subjectId.pristine" class="alert alert-danger">
+            Subject Id is required
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="site">Site</label>
+        <select class="form-control" id="site"
+                required
+                [(ngModel)]="subject.siteId" name="site"
+                #site="ngModel" >
+          <option *ngFor="let sit of sites" [value]="sit.id">{{sit.shortName}}</option>
+        </select>
+        <small [hidden]="site.valid || site.pristine" class="alert alert-danger">
+            Site is required
+        </small>
+      </div>
+      <button (click)="onSubmit()" class="btn btn-default" [disabled]="!subjectForm.form.valid">Update</button>
+      <button (click)="onCancel()" type="button" class="btn ">Cancel</button>
+    </form>
+  </div>
+
+</div>

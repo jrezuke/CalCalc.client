@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from "app/shared/shared.module";
 import { HomeComponent } from './home/home.component';
 import { SitesService } from "app/sites/sites.service";
+import { SubjectsService } from "app/subjects/subjects.service";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { SitesService } from "app/sites/sites.service";
     SharedModule.forRoot() //this is available in lazy load mods
   ],
   providers: [
-    SitesService
+    SitesService, SubjectsService
   ],
   bootstrap: [AppComponent]
 })
