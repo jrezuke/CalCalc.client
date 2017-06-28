@@ -28,7 +28,7 @@ export class SubjectsService {
       .catch(this.handleError);
   }
 
-  addSite(subject: Subject) {
+  addSubject(subject: Subject) {
     let headers = new Headers();
     headers.append('Content-type', 'application/json');
     let requestOpts = new RequestOptions();
@@ -40,7 +40,7 @@ export class SubjectsService {
       .catch(this.handleError);
   }
 
-  updateSite(subject: Subject) {
+  updateSubject(subject: Subject) {
     let headers = new Headers();
     headers.append('Content-type', 'application/json');
     let requestOpts = new RequestOptions();
