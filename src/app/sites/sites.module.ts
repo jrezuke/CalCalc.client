@@ -8,6 +8,8 @@ import { SitesListComponent } from './sites-list.component';
 import { SitesNewComponent } from './sites-new.component';
 import { SitesEditComponent } from './sites-edit.component';
 import { SiteResolver } from './site.resolver';
+//import { ConfirmModalComponent } from "../shared/modals/confirm-modal.component";
+
 
 @NgModule({
   imports: [SitesRoutingModule,

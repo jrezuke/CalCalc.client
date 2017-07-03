@@ -9,18 +9,21 @@ import { SharedModule } from "app/shared/shared.module";
 import { HomeComponent } from './home/home.component';
 import { SitesService } from "app/sites/sites.service";
 import { SubjectsService } from "app/subjects/subjects.service";
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule } from "ngx-bootstrap/modal";
+import { ConfirmModalComponent } from "./shared/modals/confirm-modal.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpModule,
+    HttpModule,    
+    ModalModule.forRoot(),
     SharedModule.forRoot() //this is available in lazy load mods
   ],
   providers: [
