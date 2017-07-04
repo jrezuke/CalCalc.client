@@ -8,17 +8,16 @@ import { SitesListComponent } from './sites-list.component';
 import { SitesNewComponent } from './sites-new.component';
 import { SitesEditComponent } from './sites-edit.component';
 import { SiteResolver } from './site.resolver';
-//import { ConfirmModalComponent } from "../shared/modals/confirm-modal.component";
-
+import { SharedModule } from "app/shared/shared.module";
 
 @NgModule({
   imports: [SitesRoutingModule,
-    CommonModule, FormsModule
+    CommonModule, FormsModule, SharedModule
   ],
   providers: [SiteResolver],
   declarations: [SitesComponent,
     SitesNewComponent,
     SitesListComponent,
-    SitesEditComponent]
+    SitesEditComponent  ]
 })
 export class SitesModule { }
