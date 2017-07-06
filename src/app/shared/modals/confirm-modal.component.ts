@@ -4,7 +4,8 @@ import { ModalDirective } from 'ngx-bootstrap/modal'
 @Component({
     moduleId: module.id,
     selector: 'confirm-modal',
-    templateUrl: 'confirm-modal.component.html'
+    templateUrl: 'confirm-modal.component.html',
+    styleUrls: ['./confirm-modal.css']
 })
 
 export class ConfirmModalComponent implements OnInit {
