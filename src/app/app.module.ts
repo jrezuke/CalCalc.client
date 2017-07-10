@@ -9,6 +9,7 @@ import { SharedModule } from "app/shared/shared.module";
 import { HomeComponent } from './home/home.component';
 import { SitesService } from "app/sites/sites.service";
 import { SubjectsService } from "app/subjects/subjects.service";
+import { SubjectSelectComponent } from './calculations/subject-select/subject-select.component';
 //import { ModalModule } from "ngx-bootstrap/modal";
 //import { ConfirmModalComponent } from "./shared/modals/confirm-modal.component";
 
@@ -16,6 +17,7 @@ import { SubjectsService } from "app/subjects/subjects.service";
   declarations: [
     AppComponent,
     HomeComponent,
+    SubjectSelectComponent,
     //ConfirmModalComponent
   ],
   imports: [
