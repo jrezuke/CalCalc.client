@@ -21,6 +21,13 @@ export class SubjectsService {
       .catch(this.handleError);
   }
 
+  getSubjectsBySite(id:string) {
+    this.apiUrl = "http://localhost:6702/api/subjects/GetBySite/" + id;
+    return this._http.get(this.apiUrl)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
   getSubject(id: string) {
     this.apiUrl = "http://localhost:6702/api/subjects/" + id;
     return this._http.get(this.apiUrl)

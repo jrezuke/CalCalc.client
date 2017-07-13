@@ -23,9 +23,15 @@ export class CalculationsComponent implements OnInit {
     this._sitesService.getSites().subscribe((res) => {
       console.log("sites res:", res);
       this.sites = res;
-    })
+    })    
+  }
 
-    
+  onSiteSelect(value: string){
+    console.log("CalculationsComponent.onSiteSelect - value:", value);
+    this._subjectsService.getSubjectsBySite(value).subscribe((res) => {
+      console.log("subjects res:", res);
+      this.subjects = res;
+    })    
   }
 
   

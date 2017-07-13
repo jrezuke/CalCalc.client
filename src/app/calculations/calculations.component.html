@@ -3,7 +3,7 @@
     <form novalidate #subjectForm="ngForm">
       <div class="form-group">
         <label for="site">Site</label>
-        <select class="form-control" id="site" required [(ngModel)]="siteId" name="site" #site="ngModel">
+        <select (change)="onSiteSelect($event.target.value)" class="form-control" id="site" required [(ngModel)]="siteId" name="site" #site="ngModel">
           <option *ngFor="let sit of sites" [value]="sit.id">{{sit.longName}}</option>
         </select>
         <small [hidden]="site.valid || site.pristine" class="alert alert-danger">
