@@ -10,13 +10,15 @@ import { HomeComponent } from './home/home.component';
 import { SitesService } from "app/sites/sites.service";
 import { SubjectsService } from "app/subjects/subjects.service";
 import { CalculationsService } from "app/calculations/calculations.service";
+import { AboutComponent } from './about/about.component';
 //import { ModalModule } from "ngx-bootstrap/modal";
 //import { ConfirmModalComponent } from "./shared/modals/confirm-modal.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,    
+    HomeComponent,
+    AboutComponent,    
     //ConfirmModalComponent
   ],
   imports: [
