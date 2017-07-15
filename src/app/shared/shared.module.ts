@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SecurityService } from "app/shared/security.service";
 import { ConfirmModalComponent } from "./modals/confirm-modal.component";
 import { ModalModule } from 'ngx-bootstrap';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   imports: [
     CommonModule, ModalModule.forRoot()
   ],
-  exports:[ModalModule, ConfirmModalComponent],
-  declarations: [ConfirmModalComponent ]
+  exports:[ModalModule, ConfirmModalComponent,SidebarComponent],
+  declarations: [ConfirmModalComponent, SidebarComponent ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

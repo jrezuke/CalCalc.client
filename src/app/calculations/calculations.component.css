@@ -1,3 +1,10 @@
 td{
     cursor: pointer;
 }
+.center{
+    display: block;
+    text-align: center;
+    line-height: 30px;
+    color: navy;
+    font-size: 18px;
+}
