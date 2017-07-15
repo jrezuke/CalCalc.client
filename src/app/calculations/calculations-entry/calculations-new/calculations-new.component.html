@@ -1,3 +1,15 @@
-<p>
-  calculations-new works!
-</p>
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <form novalidate #calcNewForm="ngForm">
+      <div class="form-group">
+        <label for="subjectId">Subject Id</label>
+        <input type="text" class="form-control" [(ngModel)]="subject.subjectId" name="subjectId" required placeholder="Subject Id"
+          #subjectId="ngModel">
+        <small [hidden]="subjectId.valid || subjectId.pristine" class="alert alert-danger">
+            Subject Id is required
+        </small>
+      </div>
+    </form>
+
+  </div>
+</div>

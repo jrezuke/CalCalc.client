@@ -4,13 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { CalculationEntry } from "app/calculations/calculation-entry";
-
-
+import { Subject } from "app/subjects/subject";
 
 @Injectable()
 export class CalculationsService {
   apiUrl: string;
   calcEntries: Observable<CalculationEntry>[];
+  subject: Subject;
 
   constructor(private _http: Http) { }
 
@@ -21,7 +21,7 @@ export class CalculationsService {
       .catch(this.handleError);
   }
 
-  getEntriesForSubject(subjectId: string) {
+  getEntriesForSubject(subjectId: number) {
     this.apiUrl = "http://localhost:6702/api/CalEntries/GetBySubject/" + subjectId;
     return this._http.get(this.apiUrl)
       .map(res => res.json())

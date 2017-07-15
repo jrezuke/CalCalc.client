@@ -39,9 +39,10 @@ export class CalculationsComponent implements OnInit {
     })    
   }
 
-  onSubjectSelect(value: string){
-    console.log("CalculationsComponent.onSubjectSelect - value:", value);
-    this._calculationsService.getEntriesForSubject(value).subscribe((res) => {
+  onSubjectSelect(subject: Subject){
+    console.log("CalculationsComponent.onSubjectSelect - value:", subject.subjectId);
+    this._calculationsService.subject = subject;
+    this._calculationsService.getEntriesForSubject(subject.id).subscribe((res) => {
       console.log("entries res:", res);
       this.entries = res;
     })    

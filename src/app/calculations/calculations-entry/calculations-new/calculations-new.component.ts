@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from "app/subjects/subject";
+import { CalculationsService } from "app/calculations/calculations.service";
 
 @Component({
   selector: 'calculations-new',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calculations-new.component.css']
 })
 export class CalculationsNewComponent implements OnInit {
+  subject: Subject;
 
-  constructor() { }
+  constructor(private _calculationsService: CalculationsService) { }
 
   ngOnInit() {
+    this.subject = this._calculationsService.subject;
+    
   }
 
 }
