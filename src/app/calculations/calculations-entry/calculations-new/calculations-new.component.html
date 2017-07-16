@@ -1,15 +1,38 @@
-<div class="row">
-  <div class="col-xs-12 col-sm-6">
-    <form novalidate #calcNewForm="ngForm">
-      <div class="form-group">
-        <label for="subjectId">Subject Id</label>
-        <input type="text" class="form-control" [(ngModel)]="subject.subjectId" name="subjectId" required placeholder="Subject Id"
-          #subjectId="ngModel">
-        <small [hidden]="subjectId.valid || subjectId.pristine" class="alert alert-danger">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-sm-3">
+      <form novalidate #calcNewForm="ngForm">
+        <div class="form-group">
+          <label for="subjectId">Subject Id</label>
+          <input readonly type="text" class="form-control" [(ngModel)]="subject.subjectId" name="subjectId" required placeholder="Subject Id"
+            #subjectId="ngModel">
+          <!-- <small [hidden]="subjectId.valid || subjectId.pristine" class="alert alert-danger">
             Subject Id is required
-        </small>
-      </div>
-    </form>
-
+        </small> -->
+        </div>
+        <div class="form-group">
+          <label for="entryDate">Entry Date</label>
+          <input required type="text" class="form-control" [(ngModel)]="entry.entryDate" name="entryDate" #entryDate="ngModel" />
+        </div>
+        <div class="form-group">
+          <label for="weight">Weight</label>
+          <input type="text" class="form-control" [(ngModel)]="entry.weight" name="Weight" required placeholder="Weight"
+            #weight="ngModel">
+          <small [hidden]="weight.valid || weight.pristine" class="alert alert-danger">
+            Weight is required
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="hours">Hours</label>
+          <input type="text" class="form-control" [(ngModel)]="entry.hours" name="hours" required placeholder="Hours"
+            #hours="ngModel">
+          <small [hidden]="hours.valid || hours.pristine" class="alert alert-danger">
+              Hours is required
+          </small>
+        </div>
+        <button (click)="onSubmit()" class="btn btn-default" [disabled]="!calcNewForm.form.valid">Submit</button>
+        <button (click)="onCancel()" type="button" class="btn ">Cancel</button>
+      </form>
+    </div>
   </div>
 </div>

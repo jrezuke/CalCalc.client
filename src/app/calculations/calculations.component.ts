@@ -17,6 +17,7 @@ export class CalculationsComponent implements OnInit {
   sites: Site[] = new Array();
   entries: CalculationEntry[] = new Array();
   siteId: number;
+  selectedSubject:Subject;
 
   constructor(private _router: Router,
     private _sitesService: SitesService,
@@ -40,9 +41,9 @@ export class CalculationsComponent implements OnInit {
   }
 
   onSubjectSelect(subject: Subject){
-    console.log("CalculationsComponent.onSubjectSelect - value:", subject.subjectId);
-    this._calculationsService.subject = subject;
-    this._calculationsService.getEntriesForSubject(subject.id).subscribe((res) => {
+    console.log("CalculationsComponent.onSubjectSelect - subject:", this.selectedSubject);
+    this._calculationsService.subject = this.selectedSubject;
+    this._calculationsService.getEntriesForSubject(this.selectedSubject.id).subscribe((res) => {
       console.log("entries res:", res);
       this.entries = res;
     })    

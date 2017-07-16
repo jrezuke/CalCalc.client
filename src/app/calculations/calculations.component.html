@@ -18,9 +18,9 @@
           </div>
           <div class="form-group">
             <label for="subjectId">Subject</label>
-            <select (change)="onSubjectSelect($event.target.value)" class="form-control" id="subject" required [(ngModel)]="subjectId"
+            <select (change)="onSubjectSelect($event.target.value)" class="form-control" id="subject" required [(ngModel)]="selectedSubject"
               name="subject" #subject="ngModel">
-            <option *ngFor="let sub of subjects" [value]="sub.id">{{sub.subjectId}}</option>
+            <option *ngFor="let sub of subjects" [ngValue]="sub">{{sub.subjectId}}</option>
           </select>
             <small [hidden]="site.valid || site.pristine" class="alert alert-danger">
             Site is required
@@ -32,10 +32,9 @@
       </div>
     </div>
     <div class="col-xs-5 col-sm-5 col-lg-5">
-
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Edit an existing entry or <button (click)="onNewEntry()">create a new entry</button></h3>
+          <h3 class="panel-title">Edit an existing entry or <button [disabled]="!subjectForm.form.valid" (click)="onNewEntry()">create a new entry</button></h3>
         </div>
         <span class="center"><strong>Existing Entries</strong></span>
         <table class="table table-striped table-hover">
@@ -47,7 +46,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr (click)="onEntrySelect(ent)" *ngFor="let ent of entries">
+            <tr *ngFor="let ent of entries">
               <td>
                 {{ent.id}}
               </td>
@@ -55,7 +54,7 @@
                 {{ent.entryDate | date:'MM/dd/yyyy'}}
               </td>
               <td>
-                <button button button-small>Edit</button>
+                <button (click)="onEntrySelect(ent)" button button-small>Edit</button>
               </td>
             </tr>
           </tbody>

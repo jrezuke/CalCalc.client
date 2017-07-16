@@ -4,6 +4,7 @@ import { SecurityService } from "app/shared/security.service";
 import { ConfirmModalComponent } from "./modals/confirm-modal.component";
 import { ModalModule } from 'ngx-bootstrap';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { CalculationsGuard } from "app/calculations/calculations.guard";
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,         
-      providers: [SecurityService]
+      providers: [SecurityService,CalculationsGuard]
     };
   }
 }

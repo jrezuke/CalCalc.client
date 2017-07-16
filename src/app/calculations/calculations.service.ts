@@ -21,6 +21,18 @@ export class CalculationsService {
       .catch(this.handleError);
   }
 
+  addEntry(entry:CalculationEntry){
+    let headers = new Headers();
+    headers.append('Content-type', 'application/json');
+    let requestOpts = new RequestOptions();
+    requestOpts.headers = headers;
+
+    this.apiUrl = "http://localhost:6702/api/CalEntries";
+    return this._http.post(this.apiUrl, JSON.stringify(entry), requestOpts)
+      .map(res => res.json())
+      .catch(this.handleError);
+  } 
+
   getEntriesForSubject(subjectId: number) {
     this.apiUrl = "http://localhost:6702/api/CalEntries/GetBySubject/" + subjectId;
     return this._http.get(this.apiUrl)

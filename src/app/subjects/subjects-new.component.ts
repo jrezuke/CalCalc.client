@@ -32,7 +32,8 @@ export class SubjectsNewComponent implements OnInit {
     this._subjectsService.addSubject(this.subject)
       .subscribe((res) => {
         console.log("response:", res);
-        this._router.navigate(['/subjects']);
+        //TODO - navigate to ???
+        this._router.navigate(['../calculations/entry/:id']);
       },
       (e: any) => {
         console.log("error:", e);
