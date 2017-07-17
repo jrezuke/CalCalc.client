@@ -26,16 +26,17 @@ export class CalculationsNewComponent implements OnInit {
   }
 
   onSubmit(){
+    //let entId = this.entry.id.toString();
     console.log("onSubmit entry:", this.entry);
-    this._router.navigate(['../', this.entry.id], {relativeTo: this._activatedRoute});    
-    // this._calculationsService.addEntry(this.entry)
-    //   .subscribe((res) => {
-    //     console.log("response:", res);
-    //     this._router.navigate(['../', this.entry.id], {relativeTo: this._activatedRoute});
-    //   },
-    //   (e: any) => {
-    //     console.log("error:", e);
-    //   });
+        
+    this._calculationsService.addEntry(this.entry)
+      .subscribe((res:CalculationEntry) => {
+        console.log("response:", res);
+        this._router.navigate(['../' + res.id.toString() ], {relativeTo: this._activatedRoute});    
+      },
+      (e: any) => {
+        console.log("error:", e);
+      });
   }
 
   onCancel() {
