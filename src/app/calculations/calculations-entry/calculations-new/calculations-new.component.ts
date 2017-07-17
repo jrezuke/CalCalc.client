@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from "app/subjects/subject";
 import { CalculationsService } from "app/calculations/calculations.service";
 import { CalculationEntry } from "app/calculations/calculation-entry";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'calculations-new',
@@ -14,7 +14,7 @@ export class CalculationsNewComponent implements OnInit {
   entry: CalculationEntry
 
   constructor(private _calculationsService: CalculationsService,
-    private _router: Router) { }
+    private _router: Router, private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     //this url is guarded to have a subject not null from _calculationsService
@@ -27,14 +27,15 @@ export class CalculationsNewComponent implements OnInit {
 
   onSubmit(){
     console.log("onSubmit entry:", this.entry);
-    this._calculationsService.addEntry(this.entry)
-      .subscribe((res) => {
-        console.log("response:", res);
-        this._router.navigate(['/subjects']);
-      },
-      (e: any) => {
-        console.log("error:", e);
-      });
+    this._router.navigate(['../', this.entry.id], {relativeTo: this._activatedRoute});    
+    // this._calculationsService.addEntry(this.entry)
+    //   .subscribe((res) => {
+    //     console.log("response:", res);
+    //     this._router.navigate(['../', this.entry.id], {relativeTo: this._activatedRoute});
+    //   },
+    //   (e: any) => {
+    //     console.log("error:", e);
+    //   });
   }
 
   onCancel() {
