@@ -11,6 +11,7 @@ import { SitesService } from "app/sites/sites.service";
 import { SubjectsService } from "app/subjects/subjects.service";
 import { CalculationsService } from "app/calculations/calculations.service";
 import { AboutComponent } from './about/about.component';
+import { ContactsComponent } from './contacts/contacts.component';
 //import { ModalModule } from "ngx-bootstrap/modal";
 //import { ConfirmModalComponent } from "./shared/modals/confirm-modal.component";
 
@@ -18,7 +19,8 @@ import { AboutComponent } from './about/about.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent,    
+    AboutComponent,
+    ContactsComponent,    
     //ConfirmModalComponent
   ],
   imports: [
