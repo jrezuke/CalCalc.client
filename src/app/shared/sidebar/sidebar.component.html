@@ -1,6 +1,5 @@
 <aside id="sidebar">
-  <section>section</section>
-  or
-  <!-- or -->
-  <nav>nav</nav>
+  <sidebar-item [routerLink]='item.route' *ngFor="let item of sidebarItems"
+    [sidebarItem]="item" [expanded]='expanded'>
+  </sidebar-item>
 </aside>
