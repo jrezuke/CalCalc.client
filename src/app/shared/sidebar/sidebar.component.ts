@@ -7,7 +7,7 @@ import { SidebarItem } from "app/shared/sidebar/sidebar-item/sidebar-item";
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-@Input() sidebarItem:SidebarItem[];
+@Input() sidebarItems: SidebarItem[];
 @Input() expanded: boolean;
 
   constructor() { }
