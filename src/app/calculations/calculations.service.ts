@@ -15,7 +15,7 @@ export class CalculationsService {
   constructor(private _http: Http) { }
 
   getEntries() {
-    this.apiUrl = "http://localhost:6702/api/CalEntries";
+    this.apiUrl = "http://localhost:5000/api/CalEntries";
     return this._http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
@@ -27,14 +27,14 @@ export class CalculationsService {
     let requestOpts = new RequestOptions();
     requestOpts.headers = headers;
 
-    this.apiUrl = "http://localhost:6702/api/CalEntries";
+    this.apiUrl = "http://localhost:5000/api/CalEntries";
     return this._http.post(this.apiUrl, JSON.stringify(entry), requestOpts)
       .map(res => res.json())
       .catch(this.handleError);
   } 
 
   getEntriesForSubject(subjectId: number) {
-    this.apiUrl = "http://localhost:6702/api/CalEntries/GetBySubject/" + subjectId;
+    this.apiUrl = "http://localhost:5000/api/CalEntries/GetBySubject/" + subjectId;
     return this._http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);

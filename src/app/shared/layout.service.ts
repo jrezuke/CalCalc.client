@@ -12,10 +12,10 @@ export class LayoutService {
     console.log('items:', type);
     let url  = '';
     if (type === 'main') {
-      url = '/app/mainBarItems.json';
+      url = 'assets/mainBarItems.json';
     }
     if (type === 'entry') {
-      url = 'api/entryBarItems.json';
+      url = 'assets/entryBarItems.json';
     }
     console.log('url', url);
     return this._http.get(url)

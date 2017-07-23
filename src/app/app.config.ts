@@ -3,5 +3,5 @@ import { Injectable } from '@angular/core';
 @Injectable()
 
 export class AppConfig {
-    public apiBaseUrl = "http://localhost:6702/";
+    public apiBaseUrl = "http://localhost:5000/";
 }

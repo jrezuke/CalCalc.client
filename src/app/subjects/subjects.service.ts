@@ -15,21 +15,21 @@ export class SubjectsService {
   constructor(private _http: Http) { }
 
   getSubjects() {
-    this.apiUrl = "http://localhost:6702/api/subjects";
+    this.apiUrl = "http://localhost:5000/api/subjects";
     return this._http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getSubjectsBySite(id:string) {
-    this.apiUrl = "http://localhost:6702/api/subjects/GetBySite/" + id;
+    this.apiUrl = "http://localhost:5000/api/subjects/GetBySite/" + id;
     return this._http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getSubject(id: string) {
-    this.apiUrl = "http://localhost:6702/api/subjects/" + id;
+    this.apiUrl = "http://localhost:5000/api/subjects/" + id;
     return this._http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
@@ -41,7 +41,7 @@ export class SubjectsService {
     let requestOpts = new RequestOptions();
     requestOpts.headers = headers;
 
-    this.apiUrl = "http://localhost:6702/api/subjects";
+    this.apiUrl = "http://localhost:5000/api/subjects";
     return this._http.post(this.apiUrl, JSON.stringify(subject), requestOpts)
       .map(res => res.json())
       .catch(this.handleError);
@@ -53,7 +53,7 @@ export class SubjectsService {
     let requestOpts = new RequestOptions();
     requestOpts.headers = headers;
 
-    this.apiUrl = "http://localhost:6702/api/subjects/" + subject.id;
+    this.apiUrl = "http://localhost:5000/api/subjects/" + subject.id;
     return this._http.put(this.apiUrl, JSON.stringify(subject), requestOpts)
       .map(res => res.json())
       .catch(this.handleError);

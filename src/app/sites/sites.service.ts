@@ -14,14 +14,14 @@ export class SitesService {
   constructor(private _http: Http) { }
 
   getSites() {
-    this.apiUrl = "http://localhost:6702/api/sites";
+    this.apiUrl = "http://localhost:5000/api/sites";
     return this._http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getSite(id: string) {
-    this.apiUrl = "http://localhost:6702/api/sites/" + id;
+    this.apiUrl = "http://localhost:5000/api/sites/" + id;
     return this._http.get(this.apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
@@ -33,7 +33,7 @@ export class SitesService {
     let requestOpts = new RequestOptions();
     requestOpts.headers = headers;
 
-    this.apiUrl = "http://localhost:6702/api/sites";
+    this.apiUrl = "http://localhost:5000/api/sites";
     return this._http.post(this.apiUrl, JSON.stringify(site), requestOpts)
       .map(res => res.json())
       .catch(this.handleError);
@@ -45,7 +45,7 @@ export class SitesService {
     let requestOpts = new RequestOptions();
     requestOpts.headers = headers;
 
-    this.apiUrl = "http://localhost:6702/api/sites/" + site.id;
+    this.apiUrl = "http://localhost:5000/api/sites/" + site.id;
     return this._http.put(this.apiUrl, JSON.stringify(site), requestOpts)
       .map(res => res.json())
       .catch(this.handleError);
