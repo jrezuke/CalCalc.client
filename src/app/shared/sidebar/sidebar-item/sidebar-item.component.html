@@ -1,6 +1,8 @@
 <div>
-  <a >
-    <i [ngClass]="sidebarItem.iconClass" aria-hidden="true"></i>
-    <h4>{{sidebarItem.title}} {{sidebarItem.route}}</h4>
-  </a>
+  <div class="row"> 
+    <div class="col-xs-4 col-sm-4">
+      <i [ngClass]="sidebarItem.iconClass" aria-hidden="true"></i>
+    </div>
+    {{sidebarItem.title}}
+  </div>
 </div>
