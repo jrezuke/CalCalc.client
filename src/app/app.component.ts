@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from "app/shared/security.service";
-import { SidebarItem } from "app/shared/sidebar/sidebar-item/sidebar-item";
-import { LayoutService } from "app/shared/layout.service";
 
 @Component({
   selector: 'app-root',
@@ -9,10 +7,9 @@ import { LayoutService } from "app/shared/layout.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  state: string;
-  mainbarItems: SidebarItem[];
+  state: string; 
 
-  constructor(private _securityService: SecurityService, private _layoutService: LayoutService) {
+  constructor(private _securityService: SecurityService) {
 
   }
   ngOnInit() {
@@ -22,13 +19,7 @@ export class AppComponent implements OnInit {
     });
     console.log('AppComponent.ngOnInit state', this.state);
 
-    this._layoutService.getSidebarItems('main')
-        .subscribe((res: SidebarItem[]) => {
-          this.mainbarItems = res;
-          console.log('mainBarItems', this.mainbarItems);
-        },
-        (e) => console.log('error:', e));  
-        
+    
   }
   
 }

@@ -1,22 +1,22 @@
 [
   {
     "title": "Calculations",
-    "route": "calculations",
+    "route": "/calculations",
     "iconClass": "fa fa-calculator fa-2x"
   },
   {
     "title": "About",
-    "route": "about",
+    "route": "/about",
     "iconClass": "fa fa-info fa-2x "
   },
   {
     "title": "Manage Subjects",
-    "route": "subjects",
+    "route": "/subjects",
     "iconClass": "fa fa-group fa-2x"
   },
   {
     "title": "Manage Sites",
-    "route": "sites",
+    "route": "/sites",
     "iconClass": "fa fa-institution fa-2x"
   }
 ]

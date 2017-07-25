@@ -14,8 +14,9 @@ const routes: Routes = [
   {path:'entry', component:CalculationsEntryComponent,
    children: [
      {path:'new', component:CalculationsNewComponent, canActivate:[CalculationsGuard]},
-     {path:':id', component:CalculationsEditComponent,
+     {path:':id', component:CalculationsEditComponent, 
       children:[
+        {path: '', redirectTo: "fluid-infusions"},
         {path:'fluid-infusions', component:FluidInfusionsComponent},
         {path:'enteral', component:EnteralComponent},
         {path:'parenteral', component:ParenteralComponent}

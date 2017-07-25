@@ -1,2 +1,9 @@
-<sidebar></sidebar>
+<nav class="pull-left">
+        <ul class="nav nav-pills">
+          <li role="presentation"><a (click)="onSelect('fluid-infusions')">Fluid Infusions</a></li>
+          <li role="presentation"><a routerLink='enteral'>Enteral</a></li>
+          <li role="presentation"><a routerLink='parenteral'>Parenteral</a></li>
+          <li role="presentation"><a routerLink='calculations'>calculations</a></li>
+        </ul>
+</nav>
 <router-outlet></router-outlet>

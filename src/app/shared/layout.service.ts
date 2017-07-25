@@ -2,11 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { SidebarItem } from "./sidebar/sidebar-item/sidebar-item";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class LayoutService {
+  private url = new BehaviorSubject<string>("");
+  url$ = this.url.asObservable();
 
   constructor(private _http: Http) { }
+
+  setUrl(newUrl: string){
+    this.url.next(newUrl);
+  }
 
   getSidebarItems(type: string): Observable<SidebarItem[]> {
     console.log('items:', type);

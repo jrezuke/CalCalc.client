@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SecurityService } from "app/shared/security.service";
 import { ConfirmModalComponent } from "app/shared/modals/confirm-modal.component";
+import { SidebarItem } from "app/shared/sidebar/sidebar-item/sidebar-item";
+import { LayoutService } from "app/shared/layout.service";
 
 @Component({
   selector: 'home',
@@ -9,13 +11,22 @@ import { ConfirmModalComponent } from "app/shared/modals/confirm-modal.component
 })
 export class HomeComponent implements OnInit {
   @ViewChild(ConfirmModalComponent) confirmModal: ConfirmModalComponent;
-  
-  constructor(private _securityService: SecurityService) { }
+  mainbarItems: SidebarItem[];
+
+  constructor(private _securityService: SecurityService, private _layoutService: LayoutService) { }
 
   ngOnInit() {
     this._securityService.state$.subscribe(v => {
       console.log("HomeComponent.ngOnItit _securityService.state", v);
-    })
+    });
+
+    this._layoutService.getSidebarItems('main')
+        .subscribe((res: SidebarItem[]) => {
+          this.mainbarItems = res;
+          console.log('mainBarItems', this.mainbarItems);
+        },
+        (e) => console.log('error:', e));  
+        
   }
 
   onShowModalClick(modalType: string){
