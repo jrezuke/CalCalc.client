@@ -10,34 +10,38 @@ import { LayoutService } from "app/shared/layout.service";
 })
 export class CalculationsEntryComponent implements OnInit {
   calcbarItems: SidebarItem[];
-  
+  id: number;
+
   constructor(private _router: Router, 
     private _route: ActivatedRoute,
     private _layoutService: LayoutService) { }
 
   ngOnInit() {
-    // this._layoutService.getSidebarItems('entry')
-    //     .subscribe((res: SidebarItem[]) => {
-    //       this.calcbarItems = res;
-    //       console.log('calcbarItems', this.calcbarItems);
-    //     },
-    //     (e) => console.log('error:', e));  
+    this._layoutService.id$.subscribe( id => {
+      this.id = id 
+      console.log("CalculationsEntryComponent.ngOnInit: id", this.id);
+    });  
         
     this._router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        console.log("appComponent.ngInit.this._router.events.subscribe NavigationEnd-event:", event);
+        console.log("CalculationsEntryComponent.ngInit.this._router.events.subscribe NavigationEnd-event:", event);
         this.onPathChange(event.url);
       }
     });
   }
 
   onSelect(urlSeg: string){
-    this._layoutService.setUrl(urlSeg);
+    //this._layoutService.setUrl(urlSeg);
   }
   onPathChange(url: string) {
-    console.log("onPathChange path:", url);
-    //this._layoutService.setUrl(url);
+    let id = this.extractId(url);
+    console.log("CalculationsEntryComponent.onPathChange path:", url);
+    
   }
 
+  extractId(url: string){
+    let segs = url.split("/");
+    return segs[3];
+  }
   
 }

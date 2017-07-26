@@ -7,12 +7,18 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class LayoutService {
   private url = new BehaviorSubject<string>("");
+  private id = new BehaviorSubject<number>(0);
   url$ = this.url.asObservable();
+  id$ = this.id.asObservable();
 
   constructor(private _http: Http) { }
 
   setUrl(newUrl: string){
     this.url.next(newUrl);
+  }
+
+  setId(newId: number){
+    this.id.next(newId);
   }
 
   getSidebarItems(type: string): Observable<SidebarItem[]> {

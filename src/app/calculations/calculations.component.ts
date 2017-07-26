@@ -6,6 +6,7 @@ import { SubjectsService } from '../subjects/subjects.service';
 import { Router } from '@angular/router';
 import { CalculationsService } from "app/calculations/calculations.service";
 import { CalculationEntry } from "app/calculations/calculation-entry";
+import { LayoutService } from "app/shared/layout.service";
 
 @Component({
   selector: 'calculations',
@@ -21,6 +22,7 @@ export class CalculationsComponent implements OnInit {
 
   constructor(private _router: Router,
     private _sitesService: SitesService,
+    private _layoutService: LayoutService,
     private _subjectsService: SubjectsService,
     private _calculationsService: CalculationsService) { }
 
@@ -51,6 +53,7 @@ export class CalculationsComponent implements OnInit {
   
   onEntrySelect(ent:CalculationEntry){
     console.log("onEntrySelect:", ent.id);
+    this._layoutService.setId(ent.id);
     this._router.navigate(['/calculations/entry/' + ent.id]);
   }
 
