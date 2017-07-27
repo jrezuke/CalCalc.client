@@ -32,6 +32,7 @@ export class CalculationsEntryComponent implements OnInit {
 
   onSelect(urlSeg: string){
     //this._layoutService.setUrl(urlSeg);
+    this._router.navigate(["/calculations/entry/" + this.id.toString() + "/" + urlSeg]);
   }
   onPathChange(url: string) {
     let id = this.extractId(url);
