@@ -1,3 +1,45 @@
-<p>
-  fluid-infusions works!
-</p>
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <form novalidate #fiForm="ngForm">
+      <div class="form-group">
+        <label for="dextroseConcentration">Dextrose concentration</label>
+        <select (change)="onSelectChange($event)" class="form-control" id="dextroseConcentration" required [(ngModel)]="currentDc"
+          name="dextroseConcentration" #dextroseConcentration="ngModel">
+          <option *ngFor="let dc of concentrations" [ngValue]="dc">{{dc.concentration}}</option>
+        </select>
+        <small [hidden]="dextroseConcentration.valid || dextroseConcentration.pristine" class="alert alert-danger">
+            Dextrose concentration is required
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="volume">Volume (mL)</label>
+        <input type="text" class="form-control" [(ngModel)]="currentVolume" name="volume" required placeholder="enter volume" #volume="ngModel">
+        <!--<small [hidden]="volume.valid || volume.pristine" class="alert alert-danger">
+            Volume is required
+        </small>-->
+      </div>
+      <button tooltip="Remove this item" (click)="onAdd()" class="btn btn-primary" [disabled]="!fiForm.form.valid">Add</button>
+      
+    </form>
+  </div>
+</div>
+<div>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Concentration</th>
+        <th>Volume</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fl of fluidInfusions">
+        <td>{{fl.id}}</td>
+        <td>{{fl.concentration}}</td>
+        <td>{{fl.volume}}</td>
+        <td><i  (click)="onRemove(fl)" class="fa fa-remove fa-2x"></i></td>        
+      </tr>
+    </tbody>
+  </table>
+</div>

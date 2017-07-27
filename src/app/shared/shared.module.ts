@@ -9,6 +9,7 @@ import { CalculationsGuard } from "app/calculations/calculations.guard";
 import { SidebarItemComponent } from './sidebar/sidebar-item/sidebar-item.component';
 import { RouterModule } from "@angular/router";
 import { LayoutService } from "app/shared/layout.service";
+import { FluidInfusionsService } from "app/calculations/calculations-entry/calculations-edit/fluid-infusions/fluid-infusions.service";
 
 
 @NgModule({
@@ -22,7 +23,9 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,         
-      providers: [SecurityService,CalculationsGuard,LayoutService]
+      providers: [SecurityService,
+        CalculationsGuard,
+        LayoutService, FluidInfusionsService]
     };
   }
 }
