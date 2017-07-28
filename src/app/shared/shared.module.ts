@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { SecurityService } from "app/shared/security.service";
 import { ConfirmModalComponent } from "./modals/confirm-modal.component";
 import { ModalModule } from 'ngx-bootstrap';
+import { TabsModule } from 'ngx-bootstrap';
+
+
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CalculationsGuard } from "app/calculations/calculations.guard";
 import { SidebarItemComponent } from './sidebar/sidebar-item/sidebar-item.component';
@@ -14,9 +17,9 @@ import { FluidInfusionsService } from "app/calculations/calculations-entry/calcu
 
 @NgModule({
   imports: [
-    CommonModule, ModalModule.forRoot(), RouterModule
+    CommonModule, ModalModule.forRoot(), TabsModule.forRoot(), RouterModule
   ],
-  exports:[ModalModule, ConfirmModalComponent,SidebarComponent],
+  exports:[ModalModule, TabsModule, ConfirmModalComponent,SidebarComponent],
   declarations: [ConfirmModalComponent, SidebarComponent, SidebarItemComponent ]
 })
 export class SharedModule {

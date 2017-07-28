@@ -11,6 +11,7 @@ import { CalculationsEditComponent } from "app/calculations/calculations-entry/c
 import { FluidInfusionsComponent } from "app/calculations/calculations-entry/calculations-edit/fluid-infusions/fluid-infusions.component";
 import { EnteralComponent } from './calculations-entry/calculations-edit/enteral/enteral.component';
 import { ParenteralComponent } from './calculations-entry/calculations-edit/parenteral/parenteral.component';
+import { AdditivesComponent } from './calculations-entry/calculations-edit/additives/additives.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { ParenteralComponent } from './calculations-entry/calculations-edit/pare
   declarations: [CalculationsComponent, 
     CalculationsEntryComponent, 
     CalculationsNewComponent, 
-    CalculationsEditComponent, FluidInfusionsComponent, EnteralComponent, ParenteralComponent]
+    CalculationsEditComponent, FluidInfusionsComponent, EnteralComponent, ParenteralComponent, AdditivesComponent]
 })
 export class CalculationsModule { }

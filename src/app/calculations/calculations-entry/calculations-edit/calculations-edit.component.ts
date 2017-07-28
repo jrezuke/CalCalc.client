@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from "app/shared/layout.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'calculations-edit',
@@ -18,18 +19,24 @@ export class CalculationsEditComponent implements OnInit {
     })
   }
 
-  onSidebarSelect(route: string){
-    let urlSeg = route.substr(route.lastIndexOf('/')+1); 
-    console.log("onSidebarSelect", urlSeg);
+  alertMe(): void {
+    setTimeout(function (): void {
+      alert('You\'ve selected the alert tab!');
+    });
+  }
 
-    switch(urlSeg){
-      case "fluid-infusions":
-        console.log("route:", this._route);
-        this._router.navigate(["/fluid-infusions", {relativeTo: this._route}]);
-      case "enteral":
-        console.log("route:", this._route);
-        this._router.navigate(["/enteral", {relativeTo: this._route}]);  
-    }
+  onSelect(route: string){
+    //let urlSeg = route.substr(route.lastIndexOf('/')+1); 
+    console.log("onSidebarSelect", route);
+
+    // switch(urlSeg){
+    //   case "fluid-infusions":
+    //     console.log("route:", this._route);
+        
+    //   case "enteral":
+    //     console.log("route:", this._route);
+        
+    // }
   }
 
 }
