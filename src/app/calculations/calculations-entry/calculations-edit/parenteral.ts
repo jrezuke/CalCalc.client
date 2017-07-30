@@ -4,4 +4,5 @@ export class Parenteral{
   amino: number;
   lipid: number;
   volume: number;
+  type: string;
 }
