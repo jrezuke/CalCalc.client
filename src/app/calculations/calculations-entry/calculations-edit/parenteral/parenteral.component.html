@@ -70,9 +70,13 @@
           <td width="500px" *ngIf="par.type ==='parenteral'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
           <td width="500px" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
           <td>{{par.volume}}</td>
-          <td><i (click)="onRemove(fl)" class="fa fa-remove fa-2x"></i></td>
+          <td><i (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>
         </tr>
-      </tbody>
+      </tbody>      
     </table>
+    <div class="divButtons">
+      <button >Save</button>
+      <button>Cancel</button>
+    </div>
   </div>
 </div>

@@ -11,6 +11,7 @@ export class ParenteralComponent implements OnInit {
   addParenteral: Parenteral; 
   addLipVolume: number;
   addDexVolume: number;
+  id = 0;
 
   constructor() { }
 
@@ -27,14 +28,27 @@ export class ParenteralComponent implements OnInit {
       par.amino = this.addParenteral.amino; 
       par.volume = this.addDexVolume;
       par.type = "parenteral";
+      par.id = ++this.id;
     }
     else{
       par.lipid = this.addParenteral.lipid;
       par.volume = this.addLipVolume;
       par.type = "lipid";
+      par.id = ++this.id;
     }
     this.parenterals.push(par);
   }
+
+  onRemove(par:Parenteral){
+    console.log("onRemove:", par);
+    for(var i = 0; i<this.parenterals.length; i++){
+      if(par.id === this.parenterals[i].id){
+        this.parenterals.splice(i,1);
+        break;
+      }
+    }
+  }
+
   onLipidChange(event){
     console.log("onLipidChange- event:", event);
   }
