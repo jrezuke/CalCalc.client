@@ -21,15 +21,19 @@ export class ParenteralComponent implements OnInit {
 
   onAdd(tab: string){
     //validate here
+    let par = new Parenteral();
     if(tab === "parenteral"){
-      this.addParenteral.volume = this.addDexVolume;
-      this.addParenteral.type === "parenteral";
+      par.dextrose = this.addParenteral.dextrose;
+      par.amino = this.addParenteral.amino; 
+      par.volume = this.addDexVolume;
+      par.type = "parenteral";
     }
     else{
-      this.addParenteral.volume = this.addLipVolume;
-      this.addParenteral.type === "lipid";
+      par.lipid = this.addParenteral.lipid;
+      par.volume = this.addLipVolume;
+      par.type = "lipid";
     }
-    this.parenterals.push(this.addParenteral);
+    this.parenterals.push(par);
   }
   onLipidChange(event){
     console.log("onLipidChange- event:", event);

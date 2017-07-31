@@ -54,21 +54,21 @@
       </tab>
     </tabset>
   </div>
-  <div class="col-xs-3 col-sm-3 col-md-3">
+  <div class="col-xs-4 col-sm-4 col-md-4">
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Id</th>
-          <th>Ingredients</th>
+          <th width="500px">Ingredients</th>
           <th>Volume</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let par of parenterals">
-          <td>{{par.id}}</td>          
-          <td *ngIf="par.type='parenteral'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}</td>
-          <td *ngIf="par.type='lipid'">Lipid Concentration:{{par.lipid}}%</td>
+          <td>{{par.id}}</td>                       
+          <td width="500px" *ngIf="par.type ==='parenteral'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
+          <td width="500px" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
           <td>{{par.volume}}</td>
           <td><i (click)="onRemove(fl)" class="fa fa-remove fa-2x"></i></td>
         </tr>
