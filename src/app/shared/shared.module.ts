@@ -13,6 +13,7 @@ import { SidebarItemComponent } from './sidebar/sidebar-item/sidebar-item.compon
 import { RouterModule } from "@angular/router";
 import { LayoutService } from "app/shared/layout.service";
 import { FluidInfusionsService } from "app/calculations/calculations-entry/calculations-edit/fluid-infusions/fluid-infusions.service";
+import { EnteralService } from "app/calculations/calculations-entry/calculations-edit/enteral/enteral.service";
 
 
 @NgModule({
@@ -28,7 +29,9 @@ export class SharedModule {
       ngModule: SharedModule,         
       providers: [SecurityService,
         CalculationsGuard,
-        LayoutService, FluidInfusionsService]
+        LayoutService, 
+        FluidInfusionsService, 
+        EnteralService]
     };
   }
 }

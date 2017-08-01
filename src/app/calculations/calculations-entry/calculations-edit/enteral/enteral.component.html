@@ -1,3 +1,6 @@
 <p>
   enteral works!
+  <select (change)="onFormulaSelect($event.target.value)" [(ngModel)]="selectedFormula" name="formulas" id="formulas">
+    <option *ngFor="let formula of formulas" [ngValue]="formula">{{formula.name}}</option>
+  </select>
 </p>
