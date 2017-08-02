@@ -3,6 +3,7 @@ export class FluidInfusion{
     calEntriesId: number;
     dextroseConcentrationId: number;
     volume: number;
+    isNew: boolean;
 }
 
 export class FluidInfusionDisplay{

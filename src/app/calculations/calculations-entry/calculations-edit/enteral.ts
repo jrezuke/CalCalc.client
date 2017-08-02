@@ -3,4 +3,5 @@ export class Enteral {
   calEntryId: number;
   formulaListId: number;
   volume: number;
+  isNew: boolean;
 }

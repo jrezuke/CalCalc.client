@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Formula } from '../formula'
 import { EnteralService } from "app/calculations/calculations-entry/calculations-edit/enteral/enteral.service";
+import { Enteral } from "app/calculations/calculations-entry/calculations-edit/enteral";
 
 
 @Component({
@@ -12,6 +13,7 @@ import { EnteralService } from "app/calculations/calculations-entry/calculations
 export class EnteralComponent implements OnInit {
   formulas: Formula[] = new Array();
   selectedFormula: Formula;
+  enterals: Enteral[] = new Array();
   errorMessage: any;
 
   constructor(private _enteralService:EnteralService) { }
