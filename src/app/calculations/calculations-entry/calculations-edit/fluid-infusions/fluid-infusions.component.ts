@@ -28,6 +28,20 @@ export class FluidInfusionsComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
+  onSave(){
+    console.log("onSave:", this.fluidInfusions);
+    //convert to fluidInfusions
+    let fls:FluidInfusion[] = new Array()
+    for(let i=0; i<this.fluidInfusions.length; i++){
+      let fl = new FluidInfusion();
+      fl.calEntriesId = 0;
+      fl.dextroseConcentrationId = this.currentDc.id;
+      fl.volume = this.fluidInfusions[i].volume;
+      fls.push(fl);
+    }
+    this._fiService.saveNewFluidInfusions(fls)
+  }
+
   onSelectChange(event){
     console.log("onSelectChange -event:", event.target.value);
     console.log("currentDc:", this.currentDc);

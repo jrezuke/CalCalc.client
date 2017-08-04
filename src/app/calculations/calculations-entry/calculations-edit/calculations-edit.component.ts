@@ -15,6 +15,7 @@ export class CalculationsEditComponent implements OnInit {
 
   ngOnInit() {
     this._layoutService.url$.subscribe( (url) => {
+      console.log("CalculationsEditComponent.ngOnInit - url:", url);
       //this.onSidebarSelect(url);
     })
   }

@@ -6,22 +6,38 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { DextroseConcentration } from "../dextrose-concentration";
-import { FluidInfusion } from "../fluid-infusion";
+import { FluidInfusion, FluidInfusionDisplay } from "../fluid-infusion";
 
 
 @Injectable()
-export class FluidInfusionsService {  
+export class FluidInfusionsService {
 
   constructor(private _http: Http) { }
 
-  getDextroseConcentrations():Observable<DextroseConcentration[]>{
+  getDextroseConcentrations(): Observable<DextroseConcentration[]> {
     let apiUrl = "http://localhost:5000/api/dextroseconcentrations";
     return this._http.get(apiUrl)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-   handleError(err: any) {
+  saveNewFluidInfusions(fis:FluidInfusion[]){
+    let aObs:any[] = new Array(); 
+    let url = "http://localhost:5000/api/fluidinfusions"
+    for (let i=0; i<fis.length; i++){
+      let body = new FluidInfusion();
+      body.calEntriesId =  fis[i].calEntriesId;
+      body.dextroseConcentrationId = fis[i].dextroseConcentrationId;
+      body.volume = fis[i].volume;
+
+      let obs =  this._http.post(url, JSON.stringify(body));
+      aObs.push(obs);
+    }
+    return Observable.forkJoin(aObs);
+    
+  }
+
+  handleError(err: any) {
     console.log('sever error:', err);  // debug
     if (err instanceof Response) {
       return Observable.throw(err.text() || 'backend server error');
