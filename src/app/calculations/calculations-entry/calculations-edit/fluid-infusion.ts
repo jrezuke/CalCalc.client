@@ -9,6 +9,7 @@ export class FluidInfusion{
 export class FluidInfusionDisplay{
     id: number;
     concentration: number;
+    concentrationId: number;
     volume: number;
     kcalMl: number;
 }

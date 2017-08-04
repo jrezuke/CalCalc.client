@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DextroseConcentration } from "../dextrose-concentration";
 import { FluidInfusionsService } from "./fluid-infusions.service";
 import { FluidInfusion, FluidInfusionDisplay } from "../fluid-infusion";
@@ -15,13 +15,14 @@ export class FluidInfusionsComponent implements OnInit {
   fluidInfusion: FluidInfusion;
   fiDisplay: FluidInfusionDisplay;
   fluidInfusions: FluidInfusionDisplay[] = new Array(); 
-  id = 0;
+  @Input("id") id;
   
   errorMessage: any;
 
   constructor(private _fiService:FluidInfusionsService) { }
 
   ngOnInit() {
+    console.log("FluidInfusionsComponent.ngOnInit - id:", this.id);
     this._fiService.getDextroseConcentrations()
       .subscribe(
         dcs => this.concentrations = dcs,
@@ -34,8 +35,8 @@ export class FluidInfusionsComponent implements OnInit {
     let fls:FluidInfusion[] = new Array()
     for(let i=0; i<this.fluidInfusions.length; i++){
       let fl = new FluidInfusion();
-      fl.calEntriesId = 0;
-      fl.dextroseConcentrationId = this.currentDc.id;
+      fl.calEntriesId = this.id;
+      fl.dextroseConcentrationId = this.fluidInfusions[i].concentrationId;
       fl.volume = this.fluidInfusions[i].volume;
       fls.push(fl);
     }
@@ -51,6 +52,7 @@ export class FluidInfusionsComponent implements OnInit {
     this.fiDisplay = new FluidInfusionDisplay();
     this.fiDisplay.id = ++this.id;
     this.fiDisplay.concentration = this.currentDc.concentration;
+    this.fiDisplay.concentrationId = this.currentDc.id;
     this.fiDisplay.volume = this.currentVolume;
     console.log("onAdd - fluid infusion:", this.fiDisplay);
 

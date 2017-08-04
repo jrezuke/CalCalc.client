@@ -9,16 +9,16 @@ import { TabsetComponent } from 'ngx-bootstrap';
   styleUrls: ['./calculations-edit.component.css']
 })
 export class CalculationsEditComponent implements OnInit {
-  
+  id:number;
+
   constructor(private _layoutService: LayoutService,
     private _router: Router, private _route: ActivatedRoute) { }
 
   ngOnInit() {
-    this._layoutService.url$.subscribe( (url) => {
-      console.log("CalculationsEditComponent.ngOnInit - url:", url);
-      //this.onSidebarSelect(url);
-    })
-  }
+    this._route.url.subscribe(url => console.log("url: ", url))
+    console.log("snapshot url:", this._route.snapshot.url[0].path);
+    this.id = parseInt( this._route.snapshot.url[0].path);
+   }
 
   alertMe(): void {
     setTimeout(function (): void {
