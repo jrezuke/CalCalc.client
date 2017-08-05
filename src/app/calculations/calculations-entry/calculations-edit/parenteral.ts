@@ -7,4 +7,5 @@ export class Parenteral{
   volume: number;
   type: string;
   isNew: boolean;
+  displayId: number;
 }

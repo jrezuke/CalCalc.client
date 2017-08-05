@@ -14,6 +14,7 @@ import { RouterModule } from "@angular/router";
 import { LayoutService } from "app/shared/layout.service";
 import { FluidInfusionsService } from "app/calculations/calculations-entry/calculations-edit/fluid-infusions/fluid-infusions.service";
 import { EnteralService } from "app/calculations/calculations-entry/calculations-edit/enteral/enteral.service";
+import { ParenteralsService } from "app/calculations/calculations-entry/calculations-edit/parenteral/parenterals.service";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ export class SharedModule {
         CalculationsGuard,
         LayoutService, 
         FluidInfusionsService, 
+        ParenteralsService,
         EnteralService]
     };
   }

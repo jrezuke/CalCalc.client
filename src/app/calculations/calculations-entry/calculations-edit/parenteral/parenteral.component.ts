@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Parenteral } from "app/calculations/calculations-entry/calculations-edit/parenteral";
+import { ParenteralsService } from "app/calculations/calculations-entry/calculations-edit/parenteral/parenterals.service";
 
 @Component({
   selector: 'parenteral',
@@ -11,30 +12,35 @@ export class ParenteralComponent implements OnInit {
   addParenteral: Parenteral; 
   addLipVolume: number;
   addDexVolume: number;
-  id = 0;
+  @Input("id") id;
+  displayId:number;
 
-  constructor() { }
+  constructor(private _parenteralsService: ParenteralsService) { }
 
   ngOnInit() {
     this.addParenteral = new Parenteral();
     this.parenterals = new Array();
   }
 
+  onSave(){
+    this._parenteralsService.saveNewParenterals(this.parenterals)
+    .subscribe( results => console.log("onSave - results:", results))
+  }
   onAdd(tab: string){
     //validate here
     let par = new Parenteral();
+    par.displayId = ++this.displayId;
+    par.calEntryId = this.id;
     if(tab === "parenteral"){
       par.dextrose = this.addParenteral.dextrose;
       par.amino = this.addParenteral.amino; 
       par.volume = this.addDexVolume;
-      par.type = "parenteral";
-      par.id = ++this.id;
+      par.type = "parenteral";      
     }
     else{
       par.lipid = this.addParenteral.lipid;
       par.volume = this.addLipVolume;
-      par.type = "lipid";
-      par.id = ++this.id;
+      par.type = "lipid";      
     }
     this.parenterals.push(par);
   }
