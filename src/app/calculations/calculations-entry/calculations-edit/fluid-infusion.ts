@@ -1,9 +1,9 @@
 export class FluidInfusion{
     id: number;
-    calEntriesId: number;
+    calEntryId: number;
     dextroseConcentrationId: number;
     volume: number;
-    isNew: boolean;
+    isNew: boolean;    
 }
 
 export class FluidInfusionDisplay{

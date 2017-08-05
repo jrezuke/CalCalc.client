@@ -25,13 +25,17 @@ export class FluidInfusionsService {
   saveNewFluidInfusions(fis:FluidInfusion[]){
     let aObs:any[] = new Array(); 
     let url = "http://localhost:5000/api/fluidinfusions"
+    let headers = new Headers();        
+    headers.append('Content-type', 'application/json');
+    let requestOpts = new RequestOptions();
+        requestOpts.headers = headers;
     for (let i=0; i<fis.length; i++){
       let body = new FluidInfusion();
-      body.calEntriesId =  fis[i].calEntriesId;
+      body.calEntryId =  fis[i].calEntryId;
       body.dextroseConcentrationId = fis[i].dextroseConcentrationId;
       body.volume = fis[i].volume;
 
-      let obs =  this._http.post(url, JSON.stringify(body));
+      let obs =  this._http.post(url, JSON.stringify(body), requestOpts);
       aObs.push(obs);
     }
     return Observable.forkJoin(aObs);

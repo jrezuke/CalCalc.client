@@ -16,6 +16,7 @@ export class FluidInfusionsComponent implements OnInit {
   fiDisplay: FluidInfusionDisplay;
   fluidInfusions: FluidInfusionDisplay[] = new Array(); 
   @Input("id") id;
+  displayId:number;
   
   errorMessage: any;
 
@@ -35,12 +36,13 @@ export class FluidInfusionsComponent implements OnInit {
     let fls:FluidInfusion[] = new Array()
     for(let i=0; i<this.fluidInfusions.length; i++){
       let fl = new FluidInfusion();
-      fl.calEntriesId = this.id;
+      fl.calEntryId = this.id;
       fl.dextroseConcentrationId = this.fluidInfusions[i].concentrationId;
       fl.volume = this.fluidInfusions[i].volume;
       fls.push(fl);
     }
     this._fiService.saveNewFluidInfusions(fls)
+    .subscribe( results => console.log("onSave - results:", results))
   }
 
   onSelectChange(event){
@@ -50,7 +52,7 @@ export class FluidInfusionsComponent implements OnInit {
 
   onAdd(){    
     this.fiDisplay = new FluidInfusionDisplay();
-    this.fiDisplay.id = ++this.id;
+    this.fiDisplay.id = ++this.displayId;
     this.fiDisplay.concentration = this.currentDc.concentration;
     this.fiDisplay.concentrationId = this.currentDc.id;
     this.fiDisplay.volume = this.currentVolume;
