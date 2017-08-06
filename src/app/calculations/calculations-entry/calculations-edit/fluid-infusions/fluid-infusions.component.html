@@ -3,7 +3,8 @@
     <form novalidate #fiForm="ngForm">
       <div class="form-group">
         <label for="dextroseConcentration">Dextrose concentration</label>
-        <select (change)="onSelectChange($event)" class="form-control" id="dextroseConcentration" required [(ngModel)]="currentDc"
+        <select (change)="onSelectChange($event)" class="form-control" 
+          id="dextroseConcentration" required [(ngModel)]="currentDc"
           name="dextroseConcentration" #dextroseConcentration="ngModel">
           <option *ngFor="let dc of concentrations" [ngValue]="dc">{{dc.concentration}}</option>
         </select>
@@ -18,7 +19,7 @@
             Volume is required
         </small>-->
       </div>
-      <button tooltip="Remove this item" (click)="onAdd()" class="btn btn-primary" [disabled]="!fiForm.form.valid">Add</button>
+      <button (click)="onAdd()" class="btn btn-primary" [disabled]="!fiForm.form.valid">Add</button>
 
     </form>
   </div>

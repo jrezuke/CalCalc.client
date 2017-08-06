@@ -1,6 +1,52 @@
-<p>
-  enteral works!
-  <select (change)="onFormulaSelect($event.target.value)" [(ngModel)]="selectedFormula" name="formulas" id="formulas">
-    <option *ngFor="let formula of formulas" [ngValue]="formula">{{formula.name}}</option>
-  </select>
-</p>
+<div class="container row">
+  <div class="col-xs-3 col-sm-3 col-md-3">
+    <form novalidate #entForm="ngForm">
+      <div class="form-group">
+        <label for="formulas">Formula</label>
+        <select class="form-control" (change)="onFormulaSelect($event.target.value)" 
+          [(ngModel)]="selectedFormula" 
+          name="formulaList" id="formulaList" 
+          #formulaList = "ngModel"
+          >
+          <option *ngFor="let formula of formulas" [ngValue]="formula">{{formula.name}}</option>
+        </select>
+        <small [hidden]="formulaList.valid || formulaList.pristine" class="alert alert-danger">
+            Formula is required
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="volume">Volume (mL)</label>
+        <input type="text" class="form-control" [(ngModel)]="currentVolume" name="volume" required placeholder="enter volume" #volume="ngModel">
+        <!--<small [hidden]="volume.valid || volume.pristine" class="alert alert-danger">
+            Volume is required
+        </small>-->
+      </div>
+      <button (click)="onAdd()" class="btn btn-primary" [disabled]="!entForm.form.valid">Add</button>
+
+    </form>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Formula</th>
+          <th>Volume</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ent of enterals">
+          <td>{{ent.displayId}}</td>
+          <td>{{ent.formulaName}}</td>
+          <td>{{ent.volume}}</td>
+          <td><i (click)="onRemove(ent)" class="fa fa-remove fa-2x"></i></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="divButtons">
+      <button (click)="onSave()">Save</button>
+      <button>Cancel</button>
+    </div>
+  </div>
+</div>

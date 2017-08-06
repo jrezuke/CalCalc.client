@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Formula } from '../formula'
 import { EnteralService } from "app/calculations/calculations-entry/calculations-edit/enteral/enteral.service";
 import { Enteral } from "app/calculations/calculations-entry/calculations-edit/enteral";
@@ -13,8 +13,11 @@ import { Enteral } from "app/calculations/calculations-entry/calculations-edit/e
 export class EnteralComponent implements OnInit {
   formulas: Formula[] = new Array();
   selectedFormula: Formula;
+  currentVolume: number;
   enterals: Enteral[] = new Array();
   errorMessage: any;
+  @Input("id") id;
+  displayId = 0;
 
   constructor(private _enteralService:EnteralService) { }
 
@@ -31,7 +34,29 @@ export class EnteralComponent implements OnInit {
   }
 
   onSave(){
-    //this._enteralService.save
+    this._enteralService.saveNewEnterals(this.enterals)
+    .subscribe( results => console.log("onSave - results:", results))
+  }
+
+  onAdd(){
+    let ent = new Enteral();
+    ent.calEntryId = this.id;
+    ent.displayId = ++this.displayId;
+    ent.formulaListId = this.selectedFormula.id;
+    ent.volume = this.currentVolume;
+    ent.formulaName = this.selectedFormula.name;
+    this.enterals.push(ent);
+  }
+
+  onRemove(ent:Enteral){    
+    console.log("onRemove:", ent);
+    for (var i = 0; i < this.enterals.length; i++ ){
+      if(ent.displayId === this.enterals[i].displayId){
+        this.enterals.splice(i,1);
+        //this.id--;
+        break;
+      }
+    }
   }
 
 }

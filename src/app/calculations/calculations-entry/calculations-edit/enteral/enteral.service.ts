@@ -18,26 +18,45 @@ export class EnteralService {
       .catch(this.handleError);
   }
 
-  addEnteral(formula: Enteral) {
+  saveNewEnterals(enterals: Enteral[]){
+    let aObs:any[] = new Array(); 
+    let url = "http://localhost:5000/api/enterals"
+    let headers = new Headers();        
+    headers.append('Content-type', 'application/json');
+    let requestOpts = new RequestOptions();
+        requestOpts.headers = headers;
+    for (let i=0; i<enterals.length; i++){
+      let body = new Enteral();
+      body.calEntryId =  enterals[i].calEntryId;
+      body.formulaListId = enterals[i].formulaListId;
+      body.volume = enterals[i].volume;
+
+      let obs =  this._http.post(url, JSON.stringify(body), requestOpts);
+      aObs.push(obs);
+    }
+    return Observable.forkJoin(aObs);
+  }
+
+  addEnteral(enteral: Enteral) {
     let headers = new Headers();
     headers.append('Content-type', 'application/json');
     let requestOpts = new RequestOptions();
     requestOpts.headers = headers;
 
-    let apiUrl = "http://localhost:5000/api/formulas";
-    return this._http.post(apiUrl, JSON.stringify(formula), requestOpts)
+    let apiUrl = "http://localhost:5000/api/enterals";
+    return this._http.post(apiUrl, JSON.stringify(enteral), requestOpts)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  updateEnteral(formula: Enteral) {
+  updateEnteral(enteral: Enteral) {
     let headers = new Headers();
     headers.append('Content-type', 'application/json');
     let requestOpts = new RequestOptions();
     requestOpts.headers = headers;
 
-    let apiUrl = "http://localhost:5000/api/formulas/" + formula.id;
-    return this._http.put(apiUrl, JSON.stringify(formula), requestOpts)
+    let apiUrl = "http://localhost:5000/api/enterals/" + enteral.id;
+    return this._http.put(apiUrl, JSON.stringify(enteral), requestOpts)
       .map(res => res.json())
       .catch(this.handleError);
   }
