@@ -31,8 +31,18 @@ export class ParenteralsService {
       let obs =  this._http.post(url, JSON.stringify(body), requestOpts);
       aObs.push(obs);
     }
-    return Observable.forkJoin(aObs);
-    
+    return Observable.forkJoin(aObs);    
+  }
+
+  getParenterals(id: string): Observable<Parenteral[]>{
+    let url = "http://localhost:5000/api/Parenterals/entries" + "/" + id;
+    let headers = new Headers();        
+    headers.append('Content-type', 'application/json');
+    let requestOpts = new RequestOptions();
+        requestOpts.headers = headers;
+    return this._http.get(url, requestOpts)
+      .map(res => res.json())
+      .catch(this.handleError);    
   }
 
   handleError(err: any) {

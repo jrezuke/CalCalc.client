@@ -16,6 +16,7 @@ export class FluidInfusionsComponent implements OnInit {
   fiDisplay: FluidInfusionDisplay;
   fluidInfusions: FluidInfusionDisplay[] = new Array(); 
   @Input("id") id;
+  @Input("mode") mode;
   displayId:number;
   
   errorMessage: any;
@@ -23,6 +24,7 @@ export class FluidInfusionsComponent implements OnInit {
   constructor(private _fiService:FluidInfusionsService) { }
 
   ngOnInit() {
+    console.log("FluidInfusionsComponent.ngOnInit mode:", this.mode);
     console.log("FluidInfusionsComponent.ngOnInit - id:", this.id);
     this._fiService.getDextroseConcentrations()
       .subscribe(

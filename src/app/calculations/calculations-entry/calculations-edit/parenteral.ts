@@ -8,4 +8,5 @@ export class Parenteral{
   type: string;
   isNew: boolean;
   displayId: number;
+  displayName: string;
 }

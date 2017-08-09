@@ -17,11 +17,13 @@ export class EnteralComponent implements OnInit {
   enterals: Enteral[] = new Array();
   errorMessage: any;
   @Input("id") id;
+  @Input("mode") mode;
   displayId = 0;
 
   constructor(private _enteralService:EnteralService) { }
 
   ngOnInit() {
+    console.log("EnteralComponent.ngOnInit mode:", this.mode);
     this._enteralService.getFormulas()
       .subscribe(
         formulas => this.formulas = formulas,

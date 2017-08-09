@@ -13,15 +13,28 @@ export class ParenteralComponent implements OnInit {
   addLipVolume: number;
   addDexVolume: number;
   @Input("id") id;
+  @Input("mode") mode;
   displayId:number;
 
   constructor(private _parenteralsService: ParenteralsService) { }
 
   ngOnInit() {
+    console.log("ParenteralComponent.ngOnInit mode:", this.mode);
     this.addParenteral = new Parenteral();
     this.parenterals = new Array();
+
+    if(this.mode === "edit"){
+      //get existing data
+      this._parenteralsService.getParenterals(this.id)
+      .subscribe(par => this.initializeParenterals(par))
+    }
+    
   }
 
+  initializeParenterals(pars:Parenteral[]){
+    console.log("initializeParenterals",pars);
+    return pars.map
+  }
   onSave(){
     this._parenteralsService.saveNewParenterals(this.parenterals)
     .subscribe( results => console.log("onSave - results:", results))

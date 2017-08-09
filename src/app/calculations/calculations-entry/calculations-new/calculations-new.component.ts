@@ -32,7 +32,7 @@ export class CalculationsNewComponent implements OnInit {
     this._calculationsService.addEntry(this.entry)
       .subscribe((res:CalculationEntry) => {
         console.log("response:", res);
-        this._router.navigate(['../' + res.id.toString() ], {relativeTo: this._activatedRoute});    
+        this._router.navigate(['../' + res.id.toString() ], {relativeTo: this._activatedRoute, queryParams:{mode:"new"}} );    
       },
       (e: any) => {
         console.log("error:", e);
