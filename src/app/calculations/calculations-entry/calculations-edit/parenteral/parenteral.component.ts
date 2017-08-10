@@ -33,7 +33,13 @@ export class ParenteralComponent implements OnInit {
 
   initializeParenterals(pars:Parenteral[]){
     console.log("initializeParenterals",pars);
-    return pars.map
+    pars.map( par =>{
+      if(par.dextrose){par.type = "dextrose"}
+      else{par.type = "lipid"}
+      
+
+    } )
+    //return pars.map
   }
   onSave(){
     this._parenteralsService.saveNewParenterals(this.parenterals)
@@ -44,11 +50,11 @@ export class ParenteralComponent implements OnInit {
     let par = new Parenteral();
     par.displayId = ++this.displayId;
     par.calEntryId = this.id;
-    if(tab === "parenteral"){
+    if(tab === "dextrose"){
       par.dextrose = this.addParenteral.dextrose;
       par.amino = this.addParenteral.amino; 
       par.volume = this.addDexVolume;
-      par.type = "parenteral";      
+      par.type = "dextrose";      
     }
     else{
       par.lipid = this.addParenteral.lipid;

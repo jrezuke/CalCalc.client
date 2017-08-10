@@ -25,7 +25,7 @@
             Volume is required
         </small>-->
           </div>
-          <button tooltip="Remove this item" (click)="onAdd('parenteral')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Add</button>
+          <button tooltip="Remove this item" (click)="onAdd('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Add</button>
 
         </form>
       </tab>
@@ -66,8 +66,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let par of parenterals">
-          <td>{{par.id}}</td>                       
-          <td width="500px" *ngIf="par.type ==='parenteral'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
+          <td>{{par.displayId}}</td>                       
+          <td width="500px" *ngIf="par.type ==='dextrose'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
           <td width="500px" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
           <td>{{par.volume}}</td>
           <td><i (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>
