@@ -8,13 +8,13 @@ import { ParenteralsService } from "app/calculations/calculations-entry/calculat
   styleUrls: ['./parenteral.component.css']
 })
 export class ParenteralComponent implements OnInit {
-  parenterals: Parenteral[];
+  parenterals: Parenteral[] = new Array();
   addParenteral: Parenteral; 
   addLipVolume: number;
   addDexVolume: number;
   @Input("id") id;
   @Input("mode") mode;
-  displayId:number;
+  displayId=0;
 
   constructor(private _parenteralsService: ParenteralsService) { }
 
@@ -26,21 +26,22 @@ export class ParenteralComponent implements OnInit {
     if(this.mode === "edit"){
       //get existing data
       this._parenteralsService.getParenterals(this.id)
-      .subscribe(par => this.initializeParenterals(par))
+      .subscribe(pars => {
+        pars.forEach(par =>{
+          par.displayId = ++this.displayId;
+          if(par.dextrose){
+            par.type = "dextrose"
+          }
+          else{
+            par.type = "lipid"
+          }
+          this.parenterals.push(par);      
+        }); 
+      })
     }
     
   }
-
-  initializeParenterals(pars:Parenteral[]){
-    console.log("initializeParenterals",pars);
-    pars.map( par =>{
-      if(par.dextrose){par.type = "dextrose"}
-      else{par.type = "lipid"}
-      
-
-    } )
-    //return pars.map
-  }
+  
   onSave(){
     this._parenteralsService.saveNewParenterals(this.parenterals)
     .subscribe( results => console.log("onSave - results:", results))
