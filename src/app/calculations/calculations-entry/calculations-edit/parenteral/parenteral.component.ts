@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Parenteral } from "app/calculations/calculations-entry/calculations-edit/parenteral";
 import { ParenteralsService } from "app/calculations/calculations-entry/calculations-edit/parenteral/parenterals.service";
 import { EntryModeEnum } from "app/calculations/calculations-entry/calculations-edit/entryModeEnum";
+import { EntryStatusEnum } from "app/calculations/calculations-entry/calculations-edit/entryStatusEnum";
 
 @Component({
   selector: 'parenteral',
@@ -28,7 +29,9 @@ export class ParenteralComponent implements OnInit {
       //get existing data
       this._parenteralsService.getParenterals(this.id)
       .subscribe(pars => {
+        console.log("pars:", pars);
         pars.forEach(par =>{
+          par.status = EntryStatusEnum.NOT_CHANGED;
           par.displayId = ++this.displayId;
           if(par.dextrose){
             par.type = "dextrose"
@@ -66,6 +69,10 @@ export class ParenteralComponent implements OnInit {
     this.parenterals.push(par);
   }
 
+  onEdit(par:Parenteral){
+    console.log("onEdit:", par);
+    par.status = EntryStatusEnum.CHANGED
+  }
   onRemove(par:Parenteral){
     console.log("onRemove:", par);
     for(var i = 0; i<this.parenterals.length; i++){

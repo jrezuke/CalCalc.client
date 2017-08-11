@@ -62,6 +62,7 @@
           <th width="500px">Ingredients</th>
           <th>Volume</th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -70,6 +71,7 @@
           <td width="500px" *ngIf="par.type ==='dextrose'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
           <td width="500px" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
           <td>{{par.volume}}</td>
+          <td><i (click)="onEdit(par)" class="fa fa-edit fa-2x"></i></td>
           <td><i (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>
         </tr>
       </tbody>      
