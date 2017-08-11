@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Parenteral } from "app/calculations/calculations-entry/calculations-edit/parenteral";
 import { ParenteralsService } from "app/calculations/calculations-entry/calculations-edit/parenteral/parenterals.service";
+import { EntryModeEnum } from "app/calculations/calculations-entry/calculations-edit/entryModeEnum";
 
 @Component({
   selector: 'parenteral',
@@ -13,7 +14,7 @@ export class ParenteralComponent implements OnInit {
   addLipVolume: number;
   addDexVolume: number;
   @Input("id") id;
-  @Input("mode") mode;
+  @Input("mode") mode :EntryModeEnum = EntryModeEnum.NONE ;
   displayId=0;
 
   constructor(private _parenteralsService: ParenteralsService) { }
@@ -23,7 +24,7 @@ export class ParenteralComponent implements OnInit {
     this.addParenteral = new Parenteral();
     this.parenterals = new Array();
 
-    if(this.mode === "edit"){
+    if(this.mode === EntryModeEnum.EDIT){
       //get existing data
       this._parenteralsService.getParenterals(this.id)
       .subscribe(pars => {

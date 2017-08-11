@@ -3,6 +3,7 @@ import { Additive } from "app/calculations/calculations-entry/calculations-edit/
 import { AdditiveListItem } from "app/calculations/calculations-entry/calculations-edit/additiveListItem";
 import { Unit } from "app/calculations/calculations-entry/calculations-edit/unit";
 import { AdditivesService } from "app/calculations/calculations-entry/calculations-edit/additives/additives.service";
+import { EntryModeEnum } from "app/calculations/calculations-entry/calculations-edit/entryModeEnum";
 
 @Component({
   selector: 'additives',
@@ -17,7 +18,7 @@ export class AdditivesComponent implements OnInit {
   currentVolume: number;
   errorMessage: any;
   @Input("id") id;
-  @Input("mode") mode;
+  @Input("mode") mode :EntryModeEnum = EntryModeEnum.NONE ;
   displayId = 0;
   
   constructor(private _additivesService: AdditivesService) { }

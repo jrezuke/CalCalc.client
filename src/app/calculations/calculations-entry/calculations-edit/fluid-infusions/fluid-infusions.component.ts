@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DextroseConcentration } from "../dextrose-concentration";
 import { FluidInfusionsService } from "./fluid-infusions.service";
 import { FluidInfusion, FluidInfusionDisplay } from "../fluid-infusion";
+import { EntryModeEnum } from "app/calculations/calculations-entry/calculations-edit/entryModeEnum";
 
 @Component({
   selector: 'fluid-infusions',
@@ -16,7 +17,7 @@ export class FluidInfusionsComponent implements OnInit {
   fiDisplay: FluidInfusionDisplay;
   fluidInfusions: FluidInfusionDisplay[] = new Array(); 
   @Input("id") id;
-  @Input("mode") mode;
+  @Input("mode") mode :EntryModeEnum = EntryModeEnum.NONE ;
   displayId:number;
   
   errorMessage: any;

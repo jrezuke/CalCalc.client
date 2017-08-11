@@ -1,4 +1,7 @@
-export class Parenteral{
+
+import { EntryStatusEnum } from "app/calculations/calculations-entry/calculations-edit/enums";
+
+export class Parenteral {
   id: number;
   calEntryId: number;
   dextrose: number;
@@ -9,4 +12,5 @@ export class Parenteral{
   isNew: boolean;
   displayId: number;
   displayName: string;
+  status: EntryStatusEnum;  
 }

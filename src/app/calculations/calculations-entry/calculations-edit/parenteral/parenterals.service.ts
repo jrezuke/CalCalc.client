@@ -34,6 +34,30 @@ export class ParenteralsService {
     return Observable.forkJoin(aObs);    
   }
 
+  updateParenterals(par:Parenteral[]){
+    let aObs:any[] = new Array(); 
+    let url = "http://localhost:5000/api/Parenterals"
+    let headers = new Headers();        
+    headers.append('Content-type', 'application/json');
+    let requestOpts = new RequestOptions();
+        requestOpts.headers = headers;
+    for (let i=0; i<par.length; i++){
+      let id = par[i].id;
+      let urlf = url + "/" + id;
+      let body = new Parenteral();
+      body.id = id;
+      body.calEntryId =  par[i].calEntryId;
+      body.amino = par[i].amino;
+      body.dextrose = par[i].dextrose;
+      body.volume = par[i].volume;
+
+      let obs =  this._http.post(urlf, JSON.stringify(body), requestOpts);
+      aObs.push(obs);
+    }
+    return Observable.forkJoin(aObs);    
+  }
+
+
   getParenterals(id: string): Observable<Parenteral[]>{
     let url = "http://localhost:5000/api/Parenterals/entries" + "/" + id;
     let headers = new Headers();        

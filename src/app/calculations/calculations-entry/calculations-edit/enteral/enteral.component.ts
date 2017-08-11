@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Formula } from '../formula'
 import { EnteralService } from "app/calculations/calculations-entry/calculations-edit/enteral/enteral.service";
 import { Enteral } from "app/calculations/calculations-entry/calculations-edit/enteral";
+import { EntryModeEnum } from "app/calculations/calculations-entry/calculations-edit/entryModeEnum";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class EnteralComponent implements OnInit {
   enterals: Enteral[] = new Array();
   errorMessage: any;
   @Input("id") id;
-  @Input("mode") mode;
+  @Input("mode") mode :EntryModeEnum = EntryModeEnum.NONE ;
   displayId = 0;
 
   constructor(private _enteralService:EnteralService) { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LayoutService } from "app/shared/layout.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TabsetComponent } from 'ngx-bootstrap';
+import { EntryModeEnum } from "app/calculations/calculations-entry/calculations-edit/entryModeEnum";
 
 @Component({
   selector: 'calculations-edit',
@@ -10,7 +11,7 @@ import { TabsetComponent } from 'ngx-bootstrap';
 })
 export class CalculationsEditComponent implements OnInit {
   id: number;
-  mode: string;
+  mode: EntryModeEnum;
 
   constructor(private _layoutService: LayoutService,
     private _router: Router, private _route: ActivatedRoute) { }
@@ -32,11 +33,17 @@ export class CalculationsEditComponent implements OnInit {
       console.log("qp mode", qp.mode);
       if (qp.mode) {
         console.log("if qp.mode", qp.mode);
-        this.mode = qp.mode;
+        if(qp.mode === "edit"){
+          this.mode = EntryModeEnum.EDIT;
+        }
+        else{
+          this.mode = EntryModeEnum.NEW;
+        }
+        
       }
       else{
         console.log("no qp.mode", qp.mode);
-        this.mode = "";
+        this.mode = EntryModeEnum.NONE;
       }
 
     
