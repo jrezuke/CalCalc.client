@@ -47,14 +47,25 @@ export class ParenteralComponent implements OnInit {
   }
   
   onSave(){
-    this._parenteralsService.saveNewParenterals(this.parenterals)
-    .subscribe( results => console.log("onSave - results:", results))
+    if(this.mode === EntryModeEnum.NEW){
+      this._parenteralsService.saveNewParenterals(this.parenterals)
+      .subscribe( results => console.log("onSave - results:", results));
+    }
+    else if(this.mode === EntryModeEnum.EDIT){
+      this.parenterals.forEach( par =>{
+        if(par.status === EntryStatusEnum.NOT_CHANGED){
+          
+        }
+      })
+    }
+    
   }
   onAdd(tab: string){
     //validate here
     let par = new Parenteral();
     par.displayId = ++this.displayId;
     par.calEntryId = this.id;
+    par.status = EntryStatusEnum.NEW;
     if(tab === "dextrose"){
       par.dextrose = this.addParenteral.dextrose;
       par.amino = this.addParenteral.amino; 
@@ -71,12 +82,16 @@ export class ParenteralComponent implements OnInit {
 
   onEdit(par:Parenteral){
     console.log("onEdit:", par);
-    par.status = EntryStatusEnum.CHANGED
+    par.status = EntryStatusEnum.CHANGED;
   }
   onRemove(par:Parenteral){
     console.log("onRemove:", par);
+    //right now par is being removed from the array
+    //you might want to leave it in the array using the status
+    //for anything like displaying it on the screen
+    par.status = EntryStatusEnum.DELETED;
     for(var i = 0; i<this.parenterals.length; i++){
-      if(par.id === this.parenterals[i].id){
+      if(par.displayId === this.parenterals[i].displayId){       
         this.parenterals.splice(i,1);
         break;
       }
