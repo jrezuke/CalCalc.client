@@ -34,8 +34,31 @@ export class ParenteralsService {
     return Observable.forkJoin(aObs);    
   }
 
-  updateParenterals(par:Parenteral[]){
+  saveAllParenterals(newPar:Parenteral[],updatePar:Parenteral[],deletePar:Parenteral[]){
     let aObs:any[] = new Array(); 
+    let url = "http://localhost:5000/api/Parenterals"
+    let headers = new Headers();        
+    headers.append('Content-type', 'application/json');
+    let requestOpts = new RequestOptions();
+        requestOpts.headers = headers;
+    for (let i=0; i<newPar.length; i++){
+      let body = new Parenteral();
+      body.calEntryId =  newPar[i].calEntryId;
+      body.amino = newPar[i].amino;
+      body.dextrose = newPar[i].dextrose;
+      body.volume = newPar[i].volume;
+
+      let obs =  this._http.post(url, JSON.stringify(body), requestOpts);
+      aObs.push(obs);
+      this.updateParenterals(updatePar, aObs);
+      this.deleteParenterals(deletePar, aObs);
+    }
+    console.log("saveAllParenterals - aObs:", aObs);
+    return Observable.forkJoin(aObs);
+  }
+
+  updateParenterals(par:Parenteral[], aObs:any[]){
+     
     let url = "http://localhost:5000/api/Parenterals"
     let headers = new Headers();        
     headers.append('Content-type', 'application/json');
@@ -51,12 +74,29 @@ export class ParenteralsService {
       body.dextrose = par[i].dextrose;
       body.volume = par[i].volume;
 
-      let obs =  this._http.post(urlf, JSON.stringify(body), requestOpts);
+      let obs =  this._http.put(urlf, JSON.stringify(body), requestOpts);
       aObs.push(obs);
     }
-    return Observable.forkJoin(aObs);    
+    return aObs;
+    //return Observable.forkJoin(aObs);    
   }
 
+  deleteParenterals(par:Parenteral[], aObs:any[]){
+    let url = "http://localhost:5000/api/Parenterals"
+    let headers = new Headers();        
+    headers.append('Content-type', 'application/json');
+    let requestOpts = new RequestOptions();
+        requestOpts.headers = headers;
+    for (let i=0; i<par.length; i++){
+      let id = par[i].id;
+      let urlf = url + "/" + id;
+      
+      let obs =  this._http.delete(urlf, requestOpts);
+      aObs.push(obs);
+    }
+    return aObs;
+    //return Observable.forkJoin(aObs);    
+  }
 
   getParenterals(id: string): Observable<Parenteral[]>{
     let url = "http://localhost:5000/api/Parenterals/entries" + "/" + id;

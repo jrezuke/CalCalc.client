@@ -67,12 +67,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let par of parenterals">
+           
           <td>{{par.displayId}}</td>                       
           <td width="500px" *ngIf="par.type ==='dextrose'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
           <td width="500px" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
           <td>{{par.volume}}</td>
           <td><i (click)="onEdit(par)" class="fa fa-edit fa-2x"></i></td>
           <td><i (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>
+          
         </tr>
       </tbody>      
     </table>

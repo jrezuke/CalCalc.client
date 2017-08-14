@@ -47,6 +47,10 @@ export class ParenteralComponent implements OnInit {
   }
   
   onSave(){
+    let newPars:Parenteral[] = new Array();
+    let updatePars:Parenteral[] = new Array();
+    let deletePars:Parenteral[] = new Array();
+    
     if(this.mode === EntryModeEnum.NEW){
       this._parenteralsService.saveNewParenterals(this.parenterals)
       .subscribe( results => console.log("onSave - results:", results));
@@ -54,9 +58,26 @@ export class ParenteralComponent implements OnInit {
     else if(this.mode === EntryModeEnum.EDIT){
       this.parenterals.forEach( par =>{
         if(par.status === EntryStatusEnum.NOT_CHANGED){
+          //do nothing
+        }
+        if(par.status === EntryStatusEnum.NEW){
+          newPars.push(par);
+        }
+        if(par.status === EntryStatusEnum.CHANGED){
+          updatePars.push(par);
+        }
+        if(par.status === EntryStatusEnum.DELETED){
+          //check if it has an id
+          if(par.id > 0){
+            deletePars.push(par);
+          }
           
         }
       })
+      this._parenteralsService.saveAllParenterals(newPars,updatePars,deletePars)
+      .subscribe(
+        results => console.log("results: ", results)
+      )
     }
     
   }
@@ -90,12 +111,12 @@ export class ParenteralComponent implements OnInit {
     //you might want to leave it in the array using the status
     //for anything like displaying it on the screen
     par.status = EntryStatusEnum.DELETED;
-    for(var i = 0; i<this.parenterals.length; i++){
-      if(par.displayId === this.parenterals[i].displayId){       
-        this.parenterals.splice(i,1);
-        break;
-      }
-    }
+    // for(var i = 0; i<this.parenterals.length; i++){
+    //   if(par.displayId === this.parenterals[i].displayId){       
+    //     this.parenterals.splice(i,1);
+    //     break;
+    //   }
+    // }
   }
 
   onLipidChange(event){
