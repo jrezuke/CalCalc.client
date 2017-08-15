@@ -3,6 +3,7 @@ import { Parenteral } from "app/calculations/calculations-entry/calculations-edi
 import { ParenteralsService } from "app/calculations/calculations-entry/calculations-edit/parenteral/parenterals.service";
 import { EntryModeEnum } from "app/calculations/calculations-entry/calculations-edit/entryModeEnum";
 import { EntryStatusEnum } from "app/calculations/calculations-entry/calculations-edit/entryStatusEnum";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'parenteral',
@@ -17,7 +18,9 @@ export class ParenteralComponent implements OnInit {
   @Input("id") id;
   @Input("mode") mode :EntryModeEnum = EntryModeEnum.NONE ;
   displayId=0;
-
+  private bsParenterals = new BehaviorSubject<Parenteral[]>(this.parenterals);
+  obsParenterals = this.bsParenterals.asObservable();
+  
   constructor(private _parenteralsService: ParenteralsService) { }
 
   ngOnInit() {
