@@ -5,6 +5,7 @@ import { SecurityService } from "app/shared/security.service";
 import { ConfirmModalComponent } from "./modals/confirm-modal.component";
 import { ModalModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap';
+import { TooltipModule } from 'ngx-bootstrap';
 
 
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -20,9 +21,18 @@ import { AdditivesService } from "app/calculations/calculations-entry/calculatio
 
 @NgModule({
   imports: [
-    CommonModule, ModalModule.forRoot(), TabsModule.forRoot(), RouterModule
+    CommonModule, 
+    ModalModule.forRoot(), 
+    TabsModule.forRoot(), 
+    TooltipModule.forRoot(),
+    RouterModule
   ],
-  exports:[ModalModule, TabsModule, ConfirmModalComponent,SidebarComponent],
+  exports:[ModalModule, 
+    TabsModule,
+    ModalModule,
+    TooltipModule, 
+    ConfirmModalComponent,
+    SidebarComponent],
   declarations: [ConfirmModalComponent, SidebarComponent, SidebarItemComponent ]
 })
 export class SharedModule {

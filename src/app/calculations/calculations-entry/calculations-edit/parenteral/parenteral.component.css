@@ -5,3 +5,19 @@
 .divButtons{
   text-align: center;
 }
+
+.fa-remove{
+  color:red;
+}
+
+.fa-plus{
+  color:green;
+}
+
+.fa-edit{
+  color: blue;
+}
+
+.deleted{
+  text-decoration: line-through;
+}

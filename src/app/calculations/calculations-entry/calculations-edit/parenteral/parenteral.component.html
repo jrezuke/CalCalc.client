@@ -65,17 +65,16 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let par of parenterals">
-           
-          <td>{{par.displayId}}</td>                       
-          <td width="500px" *ngIf="par.type ==='dextrose'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
-          <td width="500px" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
-          <td>{{par.volume}}</td>
-          <td><i (click)="onEdit(par)" class="fa fa-edit fa-2x"></i></td>
-          <td><i (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>
-          
-        </tr>
+      <tbody>        
+        <tr *ngFor="let par of parenterals">           
+          <td [class.deleted]="par.status===3">{{par.displayId}}</td>                       
+          <td width="500px" [class.deleted]="par.status===3" *ngIf="par.type ==='dextrose'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
+          <td width="500px" [class.deleted]="par.status===3" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
+          <td [class.deleted]="par.status===3">{{par.volume}}</td>
+          <td><i tooltip="Edit item" placement="right" (click)="onEdit(par)" class="fa fa-edit fa-2x"></i></td>
+          <td *ngIf="par.status === 3"><i tooltip="Mark item as deleted" placement="right"  (click)="onUndoRemove(par)" class="fa fa-plus fa-2x"></i></td>          
+          <td *ngIf="par.status !== 3"><i tooltip="Mark item as deleted" placement="right"  (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>          
+        </tr>      
       </tbody>      
     </table>
     <div class="divButtons">

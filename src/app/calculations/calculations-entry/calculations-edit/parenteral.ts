@@ -1,5 +1,5 @@
 
-import { EntryStatusEnum } from "app/calculations/calculations-entry/calculations-edit/enums";
+import { EntryStatusEnum } from "app/calculations/calculations-entry/calculations-edit/entryStatusEnum";
 
 export class Parenteral {
   id: number;

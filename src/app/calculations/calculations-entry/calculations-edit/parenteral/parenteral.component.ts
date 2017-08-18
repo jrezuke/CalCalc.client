@@ -4,6 +4,7 @@ import { ParenteralsService } from "app/calculations/calculations-entry/calculat
 import { EntryModeEnum } from "app/calculations/calculations-entry/calculations-edit/entryModeEnum";
 import { EntryStatusEnum } from "app/calculations/calculations-entry/calculations-edit/entryStatusEnum";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+//import { TooltipDirective } from 'ngx-bootstrap/tooltip'
 
 @Component({
   selector: 'parenteral',
@@ -114,6 +115,20 @@ export class ParenteralComponent implements OnInit {
     //you might want to leave it in the array using the status
     //for anything like displaying it on the screen
     par.status = EntryStatusEnum.DELETED;
+    // for(var i = 0; i<this.parenterals.length; i++){
+    //   if(par.displayId === this.parenterals[i].displayId){       
+    //     this.parenterals.splice(i,1);
+    //     break;
+    //   }
+    // }
+  }
+
+  onUndoRemove(par:Parenteral){
+    console.log("onUndoRemove:", par);
+    //right now par is being removed from the array
+    //you might want to leave it in the array using the status
+    //for anything like displaying it on the screen
+    par.status = EntryStatusEnum.CHANGED;
     // for(var i = 0; i<this.parenterals.length; i++){
     //   if(par.displayId === this.parenterals[i].displayId){       
     //     this.parenterals.splice(i,1);
