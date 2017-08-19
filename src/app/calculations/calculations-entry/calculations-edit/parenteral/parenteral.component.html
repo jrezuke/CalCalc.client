@@ -72,7 +72,7 @@
           <td width="500px" [class.deleted]="par.status===3" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
           <td [class.deleted]="par.status===3">{{par.volume}}</td>
           <td><i tooltip="Edit item" placement="right" (click)="onEdit(par)" class="fa fa-edit fa-2x"></i></td>
-          <td *ngIf="par.status === 3"><i tooltip="Mark item as deleted" placement="right"  (click)="onUndoRemove(par)" class="fa fa-plus fa-2x"></i></td>          
+          <td *ngIf="par.status === 3"><i tooltip="Undo delete" placement="right"  (click)="onUndoRemove(par)" class="fa fa-undo fa-2x"></i></td>          
           <td *ngIf="par.status !== 3"><i tooltip="Mark item as deleted" placement="right"  (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>          
         </tr>      
       </tbody>      
