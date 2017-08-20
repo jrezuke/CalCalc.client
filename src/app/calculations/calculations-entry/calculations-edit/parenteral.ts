@@ -12,5 +12,6 @@ export class Parenteral {
   isNew: boolean;
   displayId: number;
   displayName: string;
-  status: EntryStatusEnum;  
+  status: EntryStatusEnum; 
+  previousStatus: EntryStatusEnum; 
 }

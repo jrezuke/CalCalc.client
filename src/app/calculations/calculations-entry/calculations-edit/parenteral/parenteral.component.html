@@ -1,6 +1,6 @@
 <div class="container row">
   <div class="col-xs-3 col-sm-3 col-md-3">
-    <tabset>
+    <tabset #parenteralTabs>
       <tab heading="Dextrose">
         <form novalidate #dexForm="ngForm">
           <div class="form-group">
@@ -25,7 +25,8 @@
             Volume is required
         </small>-->
           </div>
-          <button tooltip="Remove this item" (click)="onAdd('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Add</button>
+          <button *ngIf="!editMode" tooltip="Add this item" (click)="onAdd('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Add</button>
+          <button *ngIf="editMode" tooltip="Save this item" (click)="onSaveChanges('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Save changes</button>
 
         </form>
       </tab>
@@ -48,8 +49,9 @@
             Volume is required
         </small>-->
           </div>
-          <button tooltip="Remove this item" (click)="onAdd('lipid')" class="btn btn-primary" [disabled]="!lipForm.form.valid">Add</button>
-
+          <button *ngIf="!editMode" tooltip="Add this item" (click)="onAdd('lipid')" class="btn btn-primary" [disabled]="!lipForm.form.valid">Add</button>
+          <button *ngIf="editMode" tooltip="Save this item" (click)="onSaveChanges('lipid')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Save changes</button>
+          
         </form>
       </tab>
     </tabset>
@@ -72,7 +74,7 @@
           <td width="500px" [class.deleted]="par.status===3" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
           <td [class.deleted]="par.status===3">{{par.volume}}</td>
           <td><i tooltip="Edit item" placement="right" (click)="onEdit(par)" class="fa fa-edit fa-2x"></i></td>
-          <td *ngIf="par.status === 3"><i tooltip="Mark item as deleted" placement="right"  (click)="onUndoRemove(par)" class="fa fa-plus fa-2x"></i></td>          
+          <td *ngIf="par.status === 3"><i tooltip="Undo delete" placement="right"  (click)="onUndoRemove(par)" class="fa fa-undo fa-2x"></i></td>          
           <td *ngIf="par.status !== 3"><i tooltip="Mark item as deleted" placement="right"  (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>          
         </tr>      
       </tbody>      

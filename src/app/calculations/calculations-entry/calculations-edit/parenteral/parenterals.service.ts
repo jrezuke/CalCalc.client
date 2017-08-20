@@ -46,6 +46,7 @@ export class ParenteralsService {
       body.calEntryId =  newPar[i].calEntryId;
       body.amino = newPar[i].amino;
       body.dextrose = newPar[i].dextrose;
+      body.lipid = newPar[i].lipid;
       body.volume = newPar[i].volume;
 
       let obs =  this._http.post(url, JSON.stringify(body), requestOpts);
@@ -72,6 +73,7 @@ export class ParenteralsService {
       body.calEntryId =  par[i].calEntryId;
       body.amino = par[i].amino;
       body.dextrose = par[i].dextrose;
+      body.lipid = par[i].lipid;
       body.volume = par[i].volume;
 
       let obs =  this._http.put(urlf, JSON.stringify(body), requestOpts);
