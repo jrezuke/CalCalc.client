@@ -1,6 +1,6 @@
 <div class="container row">
   <div class="col-xs-3 col-sm-3 col-md-3">
-    <tabset>
+    <tabset #parenteralTabs>
       <tab heading="Dextrose">
         <form novalidate #dexForm="ngForm">
           <div class="form-group">
@@ -25,7 +25,8 @@
             Volume is required
         </small>-->
           </div>
-          <button tooltip="Remove this item" (click)="onAdd('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Add</button>
+          <button *ngIf="!editMode" tooltip="Add this item" (click)="onAdd('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Add</button>
+          <button *ngIf="editMode" tooltip="Save this item" (click)="onSaveChanges('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Save changes</button>
 
         </form>
       </tab>
@@ -48,8 +49,9 @@
             Volume is required
         </small>-->
           </div>
-          <button tooltip="Remove this item" (click)="onAdd('lipid')" class="btn btn-primary" [disabled]="!lipForm.form.valid">Add</button>
-
+          <button *ngIf="!editMode" tooltip="Add this item" (click)="onAdd('lipid')" class="btn btn-primary" [disabled]="!lipForm.form.valid">Add</button>
+          <button *ngIf="editMode" tooltip="Save this item" (click)="onSaveChanges('lipid')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Save changes</button>
+          
         </form>
       </tab>
     </tabset>
