@@ -16,6 +16,7 @@ export class ParenteralComponent implements OnInit {
   @ViewChild("parenteralTabs") parenteralTabs: TabsetComponent;
   parenterals: Parenteral[] = new Array();
   addParenteral: Parenteral;
+  editParenteral: Parenteral;
   addLipVolume: number;
   addDexVolume: number;
   @Input("id") id;
@@ -127,17 +128,31 @@ export class ParenteralComponent implements OnInit {
       this.addLipVolume = par.volume;
       this.parenteralTabs.tabs[1].active = true;
     }
-    this.editMode = true;
-    if (par.status === EntryStatusEnum.NOT_CHANGED) {
-      par.status = EntryStatusEnum.CHANGED;
+    this.editParenteral = par;
+    this.editMode = true;    
+
+  }
+
+  onSaveChanges(type: string){    
+    if(this.editParenteral.type === "dextrose"){
+      this.editParenteral.amino = this.addParenteral.amino;
+      this.editParenteral.dextrose = this.addParenteral.dextrose;
+      this.editParenteral.volume = this.addDexVolume;
     }
-
-  }
-
-  onSaveChanges(type: string){
+    else{
+      this.editParenteral.lipid = this.addParenteral.lipid;
+      this.editParenteral.volume = this.addLipVolume;
+    }
+    if (this.editParenteral.status === EntryStatusEnum.NOT_CHANGED) {
+      this.editParenteral.status = EntryStatusEnum.CHANGED;
+    }
     this.editMode = false;
-    
   }
+
+  onCancelChanges(){
+    this.editMode = false;
+  }
+
   onRemove(par: Parenteral) {
     console.log("onRemove:", par);
     //right now par is being removed from the array
