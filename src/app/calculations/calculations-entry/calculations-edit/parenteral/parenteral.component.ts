@@ -6,6 +6,8 @@ import { EntryStatusEnum } from "app/calculations/calculations-entry/calculation
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 //import { TooltipDirective } from 'ngx-bootstrap/tooltip'
 import { TabsetComponent } from 'ngx-bootstrap';
+import { FormGroup, FormControl, FormControlName, FormBuilder } from "@angular/forms";
+
 
 @Component({
   selector: 'parenteral',
@@ -23,14 +25,26 @@ export class ParenteralComponent implements OnInit {
   @Input("mode") mode: EntryModeEnum = EntryModeEnum.NONE;
   displayId = 0;
   editMode = false;
+  dexForm: FormGroup;
+  lipForm: FormGroup;  
 
   private bsParenterals = new BehaviorSubject<Parenteral[]>(this.parenterals);
   //obsParenterals = this.bsParenterals.asObservable();
 
-  constructor(private _parenteralsService: ParenteralsService) { }
+  constructor(private _parenteralsService: ParenteralsService,
+    private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
     console.log("ParenteralComponent.ngOnInit mode:", this.mode);
+    this.dexForm = this._formBuilder.group({
+      dextrose: {value:'', disabled:false},
+      amino: null,
+      dexVolume: null
+    });
+    this.lipForm = this._formBuilder.group({
+      lipid: null,
+      lipVolume: null
+    });
     this.addParenteral = new Parenteral();
     this.parenterals = new Array();
 

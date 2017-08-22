@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+//import { CommonModule } from '@angular/common';
+
 
 import { SharedModule } from "app/shared/shared.module";
 import { CalculationsRoutingModule } from './calculations-routing.module';
@@ -14,9 +14,7 @@ import { ParenteralComponent } from './calculations-entry/calculations-edit/pare
 import { AdditivesComponent } from './calculations-entry/calculations-edit/additives/additives.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
+  imports: [    
     CalculationsRoutingModule,
     SharedModule    
   ],
