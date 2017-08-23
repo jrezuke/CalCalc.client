@@ -6,6 +6,8 @@ import { EntryStatusEnum } from "app/calculations/calculations-entry/calculation
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 //import { TooltipDirective } from 'ngx-bootstrap/tooltip'
 import { TabsetComponent } from 'ngx-bootstrap';
+import { FormGroup, FormControl, FormControlName, FormBuilder } from "@angular/forms";
+
 
 @Component({
   selector: 'parenteral',
@@ -23,14 +25,29 @@ export class ParenteralComponent implements OnInit {
   @Input("mode") mode: EntryModeEnum = EntryModeEnum.NONE;
   displayId = 0;
   editMode = false;
+  dexForm: FormGroup;
+  lipForm: FormGroup;  
 
   private bsParenterals = new BehaviorSubject<Parenteral[]>(this.parenterals);
   //obsParenterals = this.bsParenterals.asObservable();
 
-  constructor(private _parenteralsService: ParenteralsService) { }
+  constructor(private _parenteralsService: ParenteralsService,
+    private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
     console.log("ParenteralComponent.ngOnInit mode:", this.mode);
+    this.dexForm = this._formBuilder.group({
+      dextrose: {value:'', disabled:false},
+      amino: null,
+      dexVolume: null
+    });
+    this.dexForm.valueChanges.subscribe(
+      val => console.log("dexForm.valueChanges", val)
+    )
+    this.lipForm = this._formBuilder.group({
+      lipid: null,
+      lipVolume: null
+    });
     this.addParenteral = new Parenteral();
     this.parenterals = new Array();
 
@@ -98,15 +115,15 @@ export class ParenteralComponent implements OnInit {
     par.displayId = ++this.displayId;
     par.calEntryId = this.id;
     par.status = EntryStatusEnum.NEW;
-    if (tab === "dextrose") {
-      par.dextrose = this.addParenteral.dextrose;
-      par.amino = this.addParenteral.amino;
-      par.volume = this.addDexVolume;
+    if (tab === "dextrose") {      
+      par.dextrose = this.dexForm.value["dextrose"];
+      par.amino = this.dexForm.value["amino"];
+      par.volume = this.dexForm.value["dexVolume"];
       par.type = "dextrose";
     }
     else {
-      par.lipid = this.addParenteral.lipid;
-      par.volume = this.addLipVolume;
+      par.lipid = this.lipForm.value["lipid"];
+      par.volume = this.lipForm.value["lipVolume"];
       par.type = "lipid";
     }
     this.parenterals.push(par);
@@ -117,16 +134,26 @@ export class ParenteralComponent implements OnInit {
     //you don't want to change the status of NEW
 
     if (par.type === "dextrose") {
-      this.addParenteral.amino = par.amino;
-      this.addParenteral.dextrose = par.dextrose;
-      this.addDexVolume = par.volume;
+      this.dexForm.patchValue({
+        dextrose: par.dextrose,
+        amino: par.amino,
+        dexVolume: par.volume
+      });
+      // this.addParenteral.amino = par.amino;
+      // this.addParenteral.dextrose = par.dextrose;
+      // this.addDexVolume = par.volume;
       this.parenteralTabs.tabs[0].active = true;
     }
     else {
-      this.addParenteral.lipid = par.lipid;
-      console.log("addParenteral.lipid", this.addParenteral.lipid)
-      this.addLipVolume = par.volume;
-      this.parenteralTabs.tabs[1].active = true;
+      this.lipForm.patchValue({
+        lipid: par.lipid,
+        lipVolume: par.volume
+      });
+
+      // this.addParenteral.lipid = par.lipid;
+      // console.log("addParenteral.lipid", this.addParenteral.lipid)
+      // this.addLipVolume = par.volume;
+      // this.parenteralTabs.tabs[1].active = true;
     }
     this.editParenteral = par;
     this.editMode = true;    

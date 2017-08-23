@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SecurityService } from "app/shared/security.service";
 import { ConfirmModalComponent } from "./modals/confirm-modal.component";
@@ -22,12 +23,17 @@ import { AdditivesService } from "app/calculations/calculations-entry/calculatio
 @NgModule({
   imports: [
     CommonModule, 
+    FormsModule,
+    ReactiveFormsModule,
     ModalModule.forRoot(), 
     TabsModule.forRoot(), 
     TooltipModule.forRoot(),
     RouterModule
   ],
-  exports:[ModalModule, 
+  exports:[ModalModule,
+    CommonModule,
+    FormsModule, 
+    ReactiveFormsModule,
     TabsModule,
     ModalModule,
     TooltipModule, 

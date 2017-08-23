@@ -2,41 +2,30 @@
   <div class="col-xs-3 col-sm-3 col-md-3">
     <tabset #parenteralTabs>
       <tab heading="Dextrose">
-        <form novalidate #dexForm="ngForm">
+        <form novalidate [formGroup]="dexForm">
           <div class="form-group">
             <label for="dextrose">Dextrose (%)</label>
-            <input type="text" class="form-control" [(ngModel)]="addParenteral.dextrose" name="dextrose" required placeholder="enter dextrose %"
-              #dextrose="ngModel">
-            <!--<small [hidden]="dextrose.valid || dextrose.pristine" class="alert alert-danger">
-            Volume is required
-        </small>-->
+            <input type="text" class="form-control" placeholder="enter dextrose %" formControlName="dextrose">
           </div>
           <div class="form-group">
             <label for="amino">Amino Acid (%)</label>
-            <input type="text" class="form-control" [(ngModel)]="addParenteral.amino" name="amino" required placeholder="enter amino acid %" #amino="ngModel">
-            <!--<small [hidden]="amino.valid || amino.pristine" class="alert alert-danger">
-            Amino Acid is required
-        </small>-->
+            <input type="text" class="form-control" formControlName="amino" placeholder="enter amino acid %">
           </div>
           <div class="form-group">
             <label for="volume">Volume (mL)</label>
-            <input type="text" class="form-control" [(ngModel)]="addDexVolume" name="volume" required placeholder="enter volume" #volume="ngModel">
-            <!--<small [hidden]="volume.valid || volume.pristine" class="alert alert-danger">
-            Volume is required
-        </small>-->
+            <input type="text" class="form-control" formControlName="dexVolume" placeholder="enter volume">
           </div>
-          <button *ngIf="!editMode" tooltip="Add this item" (click)="onAdd('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Add</button>
-          <button *ngIf="editMode" tooltip="Save this item" (click)="onSaveChanges('dextrose')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Save changes</button>
+          <button *ngIf="!editMode" tooltip="Add this item" (click)="onAdd('dextrose')" class="btn btn-primary" [disabled]="!dexForm.valid">Add</button>
+          <button *ngIf="editMode" tooltip="Save this item" (click)="onSaveChanges('dextrose')" class="btn btn-primary" [disabled]="!dexForm.valid">Save changes</button>
 
         </form>
       </tab>
 
       <tab heading="Lipid">
-        <form novalidate #lipForm="ngForm">
+        <form novalidate [formGroup]= "lipForm">
           <div class="form-group">
             <label for="lipid">Lipid Concentration (%)</label>
-            <select (change)="onLipidChange($event.target.value)" class="form-control" id="lipid" required [(ngModel)]="addParenteral.lipid" name="lipid"
-              #lipid="ngModel">
+            <select (change)="onLipidChange($event.target.value)" class="form-control" formControlName="lipid">
               <option value="10">10</option>
               <option value="20">20</option>
               <option value="30">30</option>
@@ -44,44 +33,42 @@
           </div>
           <div class="form-group">
             <label for="volume">Volume (mL)</label>
-            <input type="text" class="form-control" [(ngModel)]="addLipVolume" name="volume" required placeholder="enter volume" #volume="ngModel">
-            <!--<small [hidden]="volume.valid || volume.pristine" class="alert alert-danger">
-            Volume is required
-        </small>-->
-          </div>
-          <button *ngIf="!editMode" tooltip="Add this item" (click)="onAdd('lipid')" class="btn btn-primary" [disabled]="!lipForm.form.valid">Add</button>
-          <button *ngIf="editMode" tooltip="Save this item" (click)="onSaveChanges('lipid')" class="btn btn-primary" [disabled]="!dexForm.form.valid">Save changes</button>
-          
-        </form>
-      </tab>
-    </tabset>
+            <input type="text" class="form-control" formControlName="lipVolume" placeholder="enter volume">
+            
+        </div>
+        <button *ngIf="!editMode" tooltip="Add this item" (click)="onAdd('lipid')" class="btn btn-primary" [disabled]="!lipForm.valid">Add</button>
+        <button *ngIf="editMode" tooltip="Save this item" (click)="onSaveChanges('lipid')" class="btn btn-primary" [disabled]="!lipForm.valid">Save changes</button>
+        
+    </form>
+  </tab>
+  </tabset>
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th width="500px">Ingredients</th>
+        <th>Volume</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let par of parenterals">
+        <td [class.deleted]="par.status===3">{{par.displayId}}</td>
+        <td width="500px" [class.deleted]="par.status===3" *ngIf="par.type ==='dextrose'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
+        <td width="500px" [class.deleted]="par.status===3" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>
+        <td [class.deleted]="par.status===3">{{par.volume}}</td>
+        <td><i tooltip="Edit item" placement="right" (click)="onEdit(par)" class="fa fa-edit fa-2x"></i></td>
+        <td *ngIf="par.status === 3"><i tooltip="Undo delete" placement="right" (click)="onUndoRemove(par)" class="fa fa-undo fa-2x"></i></td>
+        <td *ngIf="par.status !== 3"><i tooltip="Mark item as deleted" placement="right" (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="divButtons">
+    <button (click)="onSave()">Save</button>
+    <button>Cancel</button>
   </div>
-  <div class="col-xs-4 col-sm-4 col-md-4">
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th width="500px">Ingredients</th>
-          <th>Volume</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>        
-        <tr *ngFor="let par of parenterals">           
-          <td [class.deleted]="par.status===3">{{par.displayId}}</td>                       
-          <td width="500px" [class.deleted]="par.status===3" *ngIf="par.type ==='dextrose'">Dextrose:{{par.dextrose}}%, Amino Acid:{{par.amino}}% </td>
-          <td width="500px" [class.deleted]="par.status===3" *ngIf="par.type ==='lipid'">Lipid Concentration:{{par.lipid}}%</td>          
-          <td [class.deleted]="par.status===3">{{par.volume}}</td>
-          <td><i tooltip="Edit item" placement="right" (click)="onEdit(par)" class="fa fa-edit fa-2x"></i></td>
-          <td *ngIf="par.status === 3"><i tooltip="Undo delete" placement="right"  (click)="onUndoRemove(par)" class="fa fa-undo fa-2x"></i></td>          
-          <td *ngIf="par.status !== 3"><i tooltip="Mark item as deleted" placement="right"  (click)="onRemove(par)" class="fa fa-remove fa-2x"></i></td>          
-        </tr>      
-      </tbody>      
-    </table>
-    <div class="divButtons">
-      <button (click)="onSave()">Save</button>
-      <button>Cancel</button>
-    </div>
-  </div>
+</div>
 </div>
