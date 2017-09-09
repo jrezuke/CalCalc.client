@@ -51,7 +51,7 @@ export class EnteralComponent implements OnInit {
     this.enterals.push(ent);
   }
 
-  onRemove(ent:Enteral){    
+  onRemove(ent:Enteral){
     console.log("onRemove:", ent);
     for (var i = 0; i < this.enterals.length; i++ ){
       if(ent.displayId === this.enterals[i].displayId){

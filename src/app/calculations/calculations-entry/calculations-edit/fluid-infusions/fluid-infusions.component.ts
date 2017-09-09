@@ -15,11 +15,11 @@ export class FluidInfusionsComponent implements OnInit {
   currentVolume: number;
   fluidInfusion: FluidInfusion;
   fiDisplay: FluidInfusionDisplay;
-  fluidInfusions: FluidInfusionDisplay[] = new Array(); 
+  fluidInfusions: FluidInfusionDisplay[] = new Array();
   @Input("id") id;
   @Input("mode") mode :EntryModeEnum = EntryModeEnum.NONE ;
-  displayId:number;
-  
+  displayId:number = 0;
+
   errorMessage: any;
 
   constructor(private _fiService:FluidInfusionsService) { }
@@ -53,7 +53,7 @@ export class FluidInfusionsComponent implements OnInit {
     console.log("currentDc:", this.currentDc);
   }
 
-  onAdd(){    
+  onAdd(){
     this.fiDisplay = new FluidInfusionDisplay();
     this.fiDisplay.id = ++this.displayId;
     this.fiDisplay.concentration = this.currentDc.concentration;
@@ -65,7 +65,7 @@ export class FluidInfusionsComponent implements OnInit {
 
   }
 
-  onRemove(fid:FluidInfusionDisplay){    
+  onRemove(fid:FluidInfusionDisplay){
     console.log("onRemove:", fid);
     for (var i = 0; i < this.fluidInfusions.length; i++ ){
       if(fid.id === this.fluidInfusions[i].id){
