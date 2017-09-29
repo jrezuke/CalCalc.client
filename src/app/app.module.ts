@@ -20,16 +20,16 @@ import { ContactsComponent } from './contacts/contacts.component';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    ContactsComponent,    
+    ContactsComponent,
     //ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpModule,    
+    HttpModule,
     //ModalModule.forRoot(),
-    SharedModule.forRoot() //this is available in lazy load mods
+    SharedModule.forRoot() //the shared providers are available in lazy load mods
   ],
   exports:[],
   providers: [
